@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface PackageMapper {
-
     PackageDto toPackageDto(PackageEntity packageEntity);
-    PackageEntity toPackageEntity(PackageDto packageDto);}
+    PackageEntity toPackageEntity(PackageDto packageDto);
+}
 

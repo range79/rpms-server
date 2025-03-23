@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 public class ErrorResponseDto {
     private HttpStatus code;
     private String message;
-    private String detail;
     private LocalDateTime timestamp;
 
 }

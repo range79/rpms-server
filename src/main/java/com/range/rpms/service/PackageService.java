@@ -1,6 +1,5 @@
 package com.range.rpms.service;
 
-import com.range.rpms.dao.model.PackageEntity;
 import com.range.rpms.dto.PackageDto;
 import com.range.rpms.exception.PackageNotFoundException;
 import org.springframework.core.io.ByteArrayResource;
@@ -16,13 +15,16 @@ public interface PackageService {
         List<PackageDto> getAllPackages();
 
         // Searches for a package by its name
-        PackageEntity searchPackage(String packageName) throws PackageNotFoundException;
+        List<PackageDto> searchPackage(String packageName) throws PackageNotFoundException;
 
         // Adds a new package to the repository
-        PackageDto addPackage(MultipartFile file, String name, String description) throws PackageNotFoundException, IOException;
+        PackageDto addPackage(MultipartFile file, String name, String description,String version) throws PackageNotFoundException, IOException;
 
         // Downloads the package content by its name
         ByteArrayResource DownloadPackageByName(String packageName) throws PackageNotFoundException;
+
+        //Download the package content by its id
+        ByteArrayResource DownloadPackageById(String packageId) throws PackageNotFoundException;
 
         // Deletes a package by its name
         void deletePackage(String packageName) throws PackageNotFoundException;

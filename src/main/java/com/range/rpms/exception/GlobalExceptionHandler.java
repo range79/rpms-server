@@ -11,16 +11,34 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler  {
 
+
+    @ExceptionHandler(value = {
+            PackageCantUploadException.class
+    })
+    public ResponseEntity<ErrorResponseDto> handleException(Exception e) {
+        String message = e.getMessage();
+
+
+        ErrorResponseDto errorResponseDto =
+                new ErrorResponseDto(HttpStatus.BAD_REQUEST,message,LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponseDto);
+    }
+
     @ExceptionHandler(value = {
           PackageNotFoundException.class
     })
     public ResponseEntity<ErrorResponseDto> handle(Exception e) {
+
+        //store message and details to a variable
         String message = e.getMessage();
-        String details = e.getClass().getName();
 
 
         ErrorResponseDto errorResponseDto =
-                new ErrorResponseDto(HttpStatus.NOT_FOUND,message,details,LocalDateTime.now());
+                new ErrorResponseDto(HttpStatus.NOT_FOUND,message,LocalDateTime.now());
+
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponseDto);
     }
+
+
 }

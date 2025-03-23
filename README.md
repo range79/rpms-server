@@ -51,5 +51,17 @@ Bu projede hala yapılacak birçok şey var. İlk sürüm biraz eksik olabilir, 
 - **Yeni özellikler eklenmesi**: Kullanıcı arayüzü iyileştirmeleri ve yeni işlevsellikler eklenmesi.
 - **Hata düzeltmeleri ve iyileştirmeler**: Kodun daha verimli ve hatasız hale getirilmesi.
 - **Performans iyileştirmeleri**: Veritabanı ve işlem süresi optimizasyonları.
+## 📬 İletişim
+Bu proje hakkında daha fazla bilgi almak veya katkıda bulunmak isterseniz, benimle iletişime geçebilirsiniz.
 
-Bu proje hakkında daha fazla bilgi almak veya geliştirmeye katkı sağlamak isterseniz, lütfen benimle iletişime geçin. 📬
+## 📝 Değişiklik Günlüğü
+
+### Version 0.0.1-SNAPSHOT
+🚀 Projenin ilk temelleri atıldı.
+
+### Version 0.0.2-SNAPSHOT
+- **Frontend** güncellendi
+- **Add Package** servisi güncellendi
+- **Search Package** servisi düzenlendi
+- **Error Response** içindeki "detail" kaldırıldı
+- **Upload Package** controller'ı düzenlendi  

@@ -1,6 +1,5 @@
 package com.range.rpms.controller;
 
-import com.range.rpms.dao.model.PackageEntity;
 import com.range.rpms.dto.PackageDto;
 import com.range.rpms.exception.PackageNotFoundException;
 import com.range.rpms.service.PackageService;
@@ -43,7 +42,7 @@ public class PackageController {
      * rpmc search {packageName}
      */
     @GetMapping("/search/{packageName}")
-    public ResponseEntity<PackageEntity> searchpackage(@PathVariable String packageName){
+    public ResponseEntity<List<PackageDto>> searchpackage(@PathVariable String packageName){
         return ResponseEntity.ok(packageService.searchPackage(packageName));
     }
     /*
@@ -51,12 +50,19 @@ public class PackageController {
      * The Range Package Manager accesses this endpoint to find the requested package
      * and initiate the download process.
      */
-    @GetMapping("/download/{packageName}")
-    public ResponseEntity<ByteArrayResource> DownloadPackage(@PathVariable String packageName) throws PackageNotFoundException {
-        ByteArrayResource resource = packageService.DownloadPackageByName(packageName);
-        return ResponseEntity.ok()
+//    @GetMapping("o/download/{packageName}")
+//    public ResponseEntity<ByteArrayResource> DownloadPackage(@PathVariable String packageName) throws PackageNotFoundException {
+//        ByteArrayResource resource = packageService.DownloadPackageByName(packageName);
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; packagename=\"" + packageName + "\"")
+//                .body(resource);
+//    }
+    @GetMapping("/download/{packageid}")
+    public ResponseEntity<ByteArrayResource> DownloadPackageId(@PathVariable String packageid) throws PackageNotFoundException {
+    ByteArrayResource resource = packageService.DownloadPackageById(packageid);  return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; packagename=\"" + packageName + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; packagename=\"" + packageid + "\"")
                 .body(resource);
     }
 
@@ -68,8 +74,9 @@ public class PackageController {
     @PostMapping("/upload")
     public ResponseEntity<PackageDto> UploadPackage( @RequestParam("file") MultipartFile file,
                                                      @RequestParam("packageName") String name,
-                                                     @RequestParam("packageDescription") String description) throws PackageNotFoundException, IOException {
-        return ResponseEntity.ok(packageService.addPackage(file,name,description));
+                                                     @RequestParam("packageDescription") String description,
+                                                     @RequestParam("packageVersion")String version)throws PackageNotFoundException, IOException {
+        return ResponseEntity.ok(packageService.addPackage(file,name,description,version));
     }
 
 }
