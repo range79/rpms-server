@@ -1,6 +1,6 @@
 package com.range.rpms.service.impl;
 
-import com.range.rpms.dao.repository.Packagerepo;
+import com.range.rpms.dao.repository.Packagerepository;
 import com.range.rpms.dto.pkg.PackageMetaData;
 import com.range.rpms.exception.pkg.PackageNotFoundException;
 import com.range.rpms.mapper.PackageMapper;
@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 @Service
 public class PackageMetaDataServiceImpl implements PackageMetaDataService {
 
-    private final Packagerepo packagerepo;
+    private final Packagerepository packagerepository;
 
     private final PackageMapper packageMapper;
 
-    public PackageMetaDataServiceImpl(Packagerepo packagerepo,PackageMapper packageMapper) {
+    public PackageMetaDataServiceImpl(Packagerepository packagerepository, PackageMapper packageMapper) {
 
-        this.packagerepo = packagerepo;
+        this.packagerepository = packagerepository;
         this.packageMapper = packageMapper;
 
     }
@@ -30,7 +30,7 @@ public class PackageMetaDataServiceImpl implements PackageMetaDataService {
     @Override
     public List<PackageMetaData> getAllPackages() {
         //find all packages from db
-        return packagerepo
+        return packagerepository
                 //findAll
                 .findAll()
                 .stream()
@@ -49,7 +49,7 @@ public class PackageMetaDataServiceImpl implements PackageMetaDataService {
     @Override
     public List<PackageMetaData> searchPackage(String packageName) throws PackageNotFoundException {
 
-        List<PackageMetaData> metaDataList=   packagerepo
+        List<PackageMetaData> metaDataList=   packagerepository
                 .findByNameLike(packageName)
                 .stream()
                 /*

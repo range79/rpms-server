@@ -1,6 +1,6 @@
 package com.range.rpms.controller.pkg;
 
-import com.range.rpms.dto.ApiResponse;
+import com.range.rpms.dto.GenericResponse;
 import com.range.rpms.dto.pkg.PackageMetaData;
 import com.range.rpms.service.PackageMetaDataService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,7 +34,7 @@ public class PackageMetaDataController {
                     description = "All packages retrieved successfully",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
+                            schema = @Schema(implementation = GenericResponse.class),
                             examples = @ExampleObject(value = """
                 {
                   "success": true,
@@ -65,7 +65,7 @@ public class PackageMetaDataController {
                     description = "No packages available",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
+                            schema = @Schema(implementation = GenericResponse.class),
                             examples = @ExampleObject(value = """
                 {
                   "success": false,
@@ -78,8 +78,8 @@ public class PackageMetaDataController {
             )
     })
     @GetMapping("/all")
-    public ResponseEntity<ApiResponse<List<PackageMetaData>>> getAllPackages() {
-        return ResponseEntity.ok(new ApiResponse<>(true,
+    public ResponseEntity<GenericResponse<List<PackageMetaData>>> getAllPackages() {
+        return ResponseEntity.ok(new GenericResponse<>(true,
                 "all packages fetched",
                 200,
                 packageMetaDataService.getAllPackages()
@@ -101,7 +101,7 @@ public class PackageMetaDataController {
                     description = "Matching packages found",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
+                            schema = @Schema(implementation = GenericResponse.class),
                             examples = @ExampleObject(value = """
                 {
                   "success": true,
@@ -132,7 +132,7 @@ public class PackageMetaDataController {
                     description = "No matching packages found",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
+                            schema = @Schema(implementation = GenericResponse.class),
                             examples = @ExampleObject(value = """
                 {
                   "success": false,
@@ -145,10 +145,10 @@ public class PackageMetaDataController {
             )
     })
     @GetMapping("/{packageName}")
-    public ResponseEntity<ApiResponse<List<PackageMetaData>>> searchPackage(@PathVariable String packageName){
+    public ResponseEntity<GenericResponse<List<PackageMetaData>>> searchPackage(@PathVariable String packageName){
 
         return ResponseEntity.ok(new
-                ApiResponse<>(true,
+                GenericResponse<>(true,
                 "matched packages",
                 200,
                 packageMetaDataService.searchPackage(packageName)));

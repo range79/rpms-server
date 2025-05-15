@@ -1,8 +1,6 @@
 package com.range.rpms.security;
 
 import com.range.rpms.dao.model.User;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
-    private User user;
+    private final User user;
     public CustomUserDetails(User user) {
         this.user = user;
     }

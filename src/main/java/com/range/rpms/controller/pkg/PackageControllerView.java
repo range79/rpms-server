@@ -26,10 +26,7 @@ public class PackageControllerView {
 
     }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        return "login";
-    }
+
 
 
 }

@@ -20,7 +20,7 @@ public class SwaggerConfig {
                         .version("v1.0.0")
                         .license(new License().name("Apache 2.0").url("https://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("GIthub")
+                        .description("Github")
                         .url("https://github.com/range79/rpms-server"));
     }
 }

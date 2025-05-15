@@ -20,7 +20,7 @@ public class JwtUtil {
     public String generateToken(String username, Role role){
         return Jwts
                 .builder().subject(username)
-                .claim("role",role).signWith(getSecretKey())
+                .claim("role",role.name()).signWith(getSecretKey())
                 .expiration(new Date(System.currentTimeMillis()+expiresIn*1000L))
                 .compact();
     }
@@ -39,11 +39,7 @@ public class JwtUtil {
                 .parseSignedClaims(token)
                 .getPayload();
     }
-    public String getRole(String token) {
-      Claims claims = parseToken(token);
-      Object role = claims.get("role");
-      return role!=null ?role.toString():null;
-    }
+
     public String getUsername(String token) {
         Claims claims = parseToken(token);
         return claims.getSubject();

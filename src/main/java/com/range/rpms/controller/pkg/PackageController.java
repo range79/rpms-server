@@ -1,6 +1,6 @@
 package com.range.rpms.controller.pkg;
 
-import com.range.rpms.dto.ApiResponse;
+import com.range.rpms.dto.GenericResponse;
 import com.range.rpms.dto.pkg.PackageMetaData;
 import com.range.rpms.dto.pkg.UploadPackageRequest;
 import com.range.rpms.exception.pkg.PackageNotFoundException;
@@ -9,7 +9,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -41,16 +43,16 @@ public class PackageController {
             description = "Downloads a binary package file using its ID."
     )
     @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            @ApiResponse(
                     responseCode = "200",
                     description = "Package found and downloaded",
                     content = @Content(mediaType = "application/octet-stream")
             ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            @ApiResponse(
                     responseCode = "404",
                     description = "Package not found",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
+                            schema = @Schema(implementation = GenericResponse.class),
                             examples = @ExampleObject(value = """
                 {
                     "success": false,
@@ -79,13 +81,13 @@ public class PackageController {
      */
     @Operation(summary = "Delete a package by name",
             responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                    @ApiResponse(
                             responseCode = "200",
                             description = "Successfully response",
                             content = @Content(
                                     mediaType = "application/json",
 
-                                    schema = @Schema(implementation = ApiResponse.class),
+                                    schema = @Schema(implementation = GenericResponse.class),
                                     examples = @ExampleObject(value = """
                                             {
                                             "success": true,
@@ -96,12 +98,12 @@ public class PackageController {
                                             """)
 
                             )),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                    @ApiResponse(
                             responseCode = "404",
                             description = "failure",
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ApiResponse.class),
+                                    schema = @Schema(implementation = GenericResponse.class),
                                     examples = @ExampleObject(value = """
                                             {
                                             "success": false,
@@ -116,12 +118,12 @@ public class PackageController {
             }
     )
     @DeleteMapping("/delete/{packageName}")
-    public ResponseEntity<ApiResponse<Void>> deletePackage(@PathVariable String packageName) throws PackageNotFoundException {
+    public ResponseEntity<GenericResponse<Void>> deletePackage(@PathVariable String packageName) throws PackageNotFoundException {
 
         packageService.deletePackage(packageName);
 
         return ResponseEntity.ok(new
-                        ApiResponse<>(true,
+                GenericResponse<>(true,
                         "packages deleted successful",
                         HttpStatus.OK.value(),
                         null
@@ -131,13 +133,13 @@ public class PackageController {
 
     @Operation(summary = "Delete a package by name",
             responses = {
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                    @ApiResponse(
                             responseCode = "200",
                             description = "Successfully response",
                             content = @Content(
                                     mediaType = "application/json",
 
-                                    schema = @Schema(implementation = ApiResponse.class),
+                                    schema = @Schema(implementation = GenericResponse.class),
                                     examples = @ExampleObject(value = """
                                             {
                                             "success": true,
@@ -148,12 +150,12 @@ public class PackageController {
                                             """)
 
                             )),
-                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                    @ApiResponse(
                             responseCode = "404",
                             description = "failure",
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = ApiResponse.class),
+                                    schema = @Schema(implementation = GenericResponse.class),
                                     examples = @ExampleObject(value = """
                                             {
                                             "success": false,
@@ -167,10 +169,10 @@ public class PackageController {
             }
     )
     @DeleteMapping("/delete/all")
-    public ResponseEntity<ApiResponse<Void>> deleteall()
+    public ResponseEntity<GenericResponse<Void>> deleteall()
     {
         packageService.deleteAllPackages();
-        return ResponseEntity.ok(new ApiResponse<>(
+        return ResponseEntity.ok(new GenericResponse<>(
                 true,
                 "All packages deleted successfully",
                 HttpStatus.OK.value(),
@@ -183,12 +185,12 @@ public class PackageController {
             description = "Uploads a package using multipart form data. The package must include valid metadata and a supported file format."
     )
     @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            @ApiResponse(
                     responseCode = "201",
                     description = "Package uploaded successfully",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
+                            schema = @Schema(implementation = GenericResponse.class),
                             examples = @ExampleObject(value = """
                 {
                   "success": true,
@@ -205,12 +207,12 @@ public class PackageController {
             """)
                     )
             ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            @ApiResponse(
                     responseCode = "400",
                     description = "Invalid upload request",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
+                            schema = @Schema(implementation = GenericResponse.class),
                             examples = @ExampleObject(value = """
                 {
                   "success": false,
@@ -223,11 +225,11 @@ public class PackageController {
             )
     })
     @PostMapping("/upload")
-    public ResponseEntity<ApiResponse <PackageMetaData>> uploadPackage(@ModelAttribute UploadPackageRequest uploadPackageRequest)
+    public ResponseEntity<GenericResponse<PackageMetaData>> uploadPackage(@ModelAttribute @Valid UploadPackageRequest uploadPackageRequest)
             throws PackageNotFoundException, IOException {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                new ApiResponse<>(
+                new GenericResponse<>(
                         true,
                         "File uploaded successfully",
                         HttpStatus.CREATED.value(),
@@ -242,12 +244,12 @@ public class PackageController {
             description = "Updates an existing package with new metadata and file. Uses multipart/form-data."
     )
     @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            @ApiResponse(
                     responseCode = "200",
                     description = "Package updated successfully",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
+                            schema = @Schema(implementation = GenericResponse.class),
                             examples = @ExampleObject(value = """
                 {
                   "success": true,
@@ -264,12 +266,12 @@ public class PackageController {
             """)
                     )
             ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            @ApiResponse(
                     responseCode = "404",
                     description = "Package not found",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class),
+                            schema = @Schema(implementation = GenericResponse.class),
                             examples = @ExampleObject(value = """
                 {
                   "success": false,
@@ -282,8 +284,8 @@ public class PackageController {
             )
     })
     @PatchMapping("/{id}")
-    public ResponseEntity<ApiResponse<PackageMetaData>> updatePackage(@PathVariable String id,@ModelAttribute UploadPackageRequest uploadPackageRequest) throws IOException {
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(
+    public ResponseEntity<GenericResponse<PackageMetaData>> updatePackage(@PathVariable String id, @ModelAttribute @Valid UploadPackageRequest uploadPackageRequest) throws IOException {
+        return ResponseEntity.status(HttpStatus.OK).body(new GenericResponse<>(
                 true,
                 "File updated successfully",
                 HttpStatus.OK.value(),

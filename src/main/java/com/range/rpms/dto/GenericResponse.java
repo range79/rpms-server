@@ -2,12 +2,11 @@ package com.range.rpms.dto;
 
 import lombok.*;
 
-import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApiResponse<T> {
+public class GenericResponse<T> {
 
     private boolean success;
     private String message;

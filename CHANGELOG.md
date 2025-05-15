@@ -42,3 +42,15 @@ This version includes a major overhaul and several key updates:
 ### ⚠ Known Issue
 There is still a bug in the application. This version was pushed before being fully finalized in order to help resolve the issue.  
 Once the issue is fixed, the login functionality and admin panel HTML will be completed.
+
+
+
+### Version 1.0.0-final
+
+* Fixed JWT filter issue
+* Added logger to `AuthServiceImpl`
+* Added validation to controllers
+* Removed admin panel and login HTML — will either collaborate with a frontend developer or use a ready-made template
+* JWT filter is now working
+* Renamed `ApiResponse` to `GenericResponse` due to a naming conflict with Swagger
+

@@ -12,7 +12,8 @@ import com.range.rpms.exception.user.UserNotFoundException;
 import com.range.rpms.mapper.UserMapper;
 import com.range.rpms.service.AuthService;
 import com.range.rpms.util.JwtUtil;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
     private final UserMapper userMapper;
-
+    private final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
     public AuthServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder,
                            JwtUtil jwtUtil,
@@ -37,15 +38,19 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String login(UserLoginRequest userLoginRequest) {
 
-        User user = userRepository.findByUsername(userLoginRequest.getUsername()).orElseThrow(()->
-
-                new UserNotFoundException("User not found"));
+        User user = userRepository
+                .findByUsername(userLoginRequest.getUsername())
+                .orElseThrow(()->
+                        new UserNotFoundException("User not found")
+                );
 
         if (!passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
 
             throw new AuthenticationFailedException("Wrong password");
 
         }
+
+        logger.info("User '{}' successfully logged in", userLoginRequest.getUsername());
 
         return jwtUtil.generateToken(user.getUsername(), user.getRole());
 
@@ -66,16 +71,18 @@ public class AuthServiceImpl implements AuthService {
             throw new UserAlreadyExistsException("This email already taken");
 
         }
-        //encode password
+
         userRegisterRequest.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
 
         User user = userMapper.userRegisterRequestToUser(userRegisterRequest);
-        //set user a role
+
         user.setRole(Role.ROLE_USER);
-        //save user to database
+
         userRepository.save(user);
-        //return a UserRegisterResponse to client
-        return userMapper.userToUserRegisterResponseToUser(user);
+
+        logger.info("New user '{}' registered with email '{}'", user.getUsername(), user.getEmail());
+
+        return userMapper.userToUserRegisterResponse(user);
 
 
     }

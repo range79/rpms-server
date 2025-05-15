@@ -18,12 +18,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Filter;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    private JwtUtil jwtUtil;
-    private CustomUserDetailsService customUserDetailsService;
+    private final JwtUtil jwtUtil;
+    private final CustomUserDetailsService customUserDetailsService;
 
     public JwtFilter(JwtUtil jwtUtil,CustomUserDetailsService customUserDetailsService) {
         this.customUserDetailsService = customUserDetailsService;
@@ -47,15 +46,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
                     if (jwtUtil.validateToken(token, userDetails)) {
 
-                        String roleStr = jwtUtil.getRole(token);
-
-                        Role role = Role.valueOf(roleStr);
 
                         UsernamePasswordAuthenticationToken authToken =
                                 new UsernamePasswordAuthenticationToken(
                                         userDetails,
                                         null,
-                                        List.of(role));
+                                     userDetails.getAuthorities());
 
 
                         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -71,5 +67,6 @@ public class JwtFilter extends OncePerRequestFilter {
             log.error(e.getMessage());
 
         }
+        filterChain.doFilter(request, response);
     }
 }

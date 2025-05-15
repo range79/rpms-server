@@ -1,7 +1,7 @@
 package com.range.rpms.service.impl;
 
 import com.range.rpms.dao.model.PackageEntity;
-import com.range.rpms.dao.repository.Packagerepo;
+import com.range.rpms.dao.repository.Packagerepository;
 import com.range.rpms.dto.pkg.PackageMetaData;
 import com.range.rpms.dto.pkg.UploadPackageRequest;
 import com.range.rpms.exception.pkg.*;
@@ -18,12 +18,12 @@ import java.util.List;
 @Service
 public class PackageServiceImpl implements PackageService {
 
-    private final Packagerepo packagerepo;
+    private final Packagerepository packagerepository;
     private final PackageMapper packageMapper;
     private static final List<String> ALLOWED_EXTENSIONS = Arrays.asList("tgz","deb","gz","zip","tar","bz2");
 
-    public PackageServiceImpl(Packagerepo packagerepo, PackageMapper packageMapper) {
-        this.packagerepo = packagerepo;
+    public PackageServiceImpl(Packagerepository packagerepository, PackageMapper packageMapper) {
+        this.packagerepository = packagerepository;
         this.packageMapper = packageMapper;
     }
     /**
@@ -49,7 +49,7 @@ public class PackageServiceImpl implements PackageService {
             String fileExtension = getFileExtension(uploadPackageRequest.getFile().getOriginalFilename());
             packageEntity.setName(uploadPackageRequest.getName()+fileExtension);
             //save to database
-            packagerepo.save(packageEntity);
+            packagerepository.save(packageEntity);
             // return dto to avoid sending full package content.
             return packageMapper.toPackageMetaData(packageEntity);
 
@@ -75,7 +75,7 @@ public class PackageServiceImpl implements PackageService {
         //find package in database if package not find in database throw an exception
         //if package content null or empty throw an exception
 
-        PackageEntity packageEntity = packagerepo.findById(id)
+        PackageEntity packageEntity = packagerepository.findById(id)
                 .orElseThrow(()->new PackageNotFoundException("Package "+id+" not found"));
 
         if (isInValidExtension(uploadPackageRequest.getFile().getOriginalFilename())) {
@@ -89,7 +89,7 @@ public class PackageServiceImpl implements PackageService {
         packageEntity.setVersion(uploadPackageRequest.getVersion());
         packageEntity.setDescription(uploadPackageRequest.getDescription());
         packageEntity.setContent(uploadPackageRequest.getFile().getBytes());
-        return packageMapper.toPackageMetaData(packagerepo.save(packageEntity));
+        return packageMapper.toPackageMetaData(packagerepository.save(packageEntity));
 
     }
     /**
@@ -102,7 +102,7 @@ public class PackageServiceImpl implements PackageService {
     @Override
     public ByteArrayResource downloadPackageById(String packageId) throws PackageNotFoundException {
         //find package by id or else Throw an exception
-        PackageEntity packageEntity = packagerepo.findById(packageId)
+        PackageEntity packageEntity = packagerepository.findById(packageId)
                 .orElseThrow(()->new PackageNotFoundException("Package with "+packageId+" not found"));
         // if package content null or empty throw an exception
         if (packageEntity.getContent() == null || packageEntity.getContent().length == 0) {
@@ -120,16 +120,16 @@ public class PackageServiceImpl implements PackageService {
     @Transactional
     public void deletePackage(String packageName) throws PackageNotFoundException {
         // Find package or throw if not found
-        packagerepo.findByName(packageName).orElseThrow
+        packagerepository.findByName(packageName).orElseThrow
                 (()->new PackageDeletionException("Package "+packageName+" not found"));
 
-        packagerepo.deleteByName(packageName);
+        packagerepository.deleteByName(packageName);
     }
     @Override
     public void deleteAllPackages() {
-        if (packagerepo.findAll().isEmpty()==true){
+        if (packagerepository.findAll().isEmpty()){
             throw new PackageDeletionException("Packages not found");}
-        packagerepo.deleteAll();
+        packagerepository.deleteAll();
     }
 
     private boolean isInValidExtension(String packageName){
@@ -143,7 +143,7 @@ public class PackageServiceImpl implements PackageService {
             throw new PackageCantUploadException("wrong format file");
 
         }
-        // Acceptable extension list
+
 
         // get file extension from file
         String fileExtension = packageName.substring(packageName.lastIndexOf(".") + 1).toLowerCase();

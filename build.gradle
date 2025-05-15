@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.range'
-version = '0.0.2-SNAPSHOT'
+version = '1.0-final'
 
 java {
     toolchain {
