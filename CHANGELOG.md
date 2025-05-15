@@ -1,23 +1,44 @@
+# Changelog
+
+---
+
 ### Version 0.0.1-SNAPSHOT
-🚀 Projenin ilk temelleri atıldı.
+🚀 Project foundation laid out.
+
+---
 
 ### Version 0.0.2-SNAPSHOT
-- **Frontend** güncellendi
-- **Add Package** servisi güncellendi
-- **Search Package** servisi düzenlendi
-- **Error Response** içindeki "detail" kaldırıldı
-- **Upload Package** controller'ı düzenlendi
-### version 0.0.3
-dependencieler eklendi# rpms-server
-# Version 1.0.0 final
-bu surumde baya guncelleme yapiyorum
-package metadata controller eklendi
-dependencies entitysi kaldirildi
-default api response eklendi 
-package dto yeniden adlandirildi packagemetadaDto
-yeni exception eklendi cantdowngrade exception
-uploadfilerequest dtosu eklendi
-Error reponse dto kaldirildi gereksiz oldugundan
-unsupporterdfileexception eklendi packagedeletionexception eklendi 
-globalexception handlerde eklemeler yapildi
-SWAGGERE DOKUMANTASYON YAPILDI  
+- **Frontend** updated
+- **Add Package** service improved
+- **Search Package** service refactored
+- Removed `"detail"` field from **Error Response**
+- Updated **Upload Package** controller
+
+---
+
+### Version 0.0.3
+- Added missing dependencies
+
+---
+
+### Version 1.0.0-beta
+This version includes a major overhaul and several key updates:
+
+- Introduced **PackageMetaDataController**
+- Removed the `Dependencies` entity
+- Added a default API response wrapper
+- Renamed `PackageDto` to `PackageMetaDataDto`
+- Added `UploadFileRequest` DTO
+- Added `CannotDowngradeException`, `UnsupportedFileException`, and `PackageDeletionException`
+- Removed unnecessary `ErrorResponseDto`
+- Fully documented the API using **Swagger**
+- Added `ErrorResponseUtil`
+- Introduced `AbstractExceptionHandler` for centralized exception handling
+- All exceptions now inherit from this abstract handler to comply with the **DRY** principle
+- Implemented `AuthController`, `JwtFilter`, and `JwtUtil` for authentication
+
+---
+
+### ⚠ Known Issue
+There is still a bug in the application. This version was pushed before being fully finalized in order to help resolve the issue.  
+Once the issue is fixed, the login functionality and admin panel HTML will be completed.
