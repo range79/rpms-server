@@ -54,16 +54,6 @@ Bu projede hala yapılacak birçok şey var. İlk sürüm biraz eksik olabilir, 
 ## 📬 İletişim
 Bu proje hakkında daha fazla bilgi almak veya katkıda bulunmak isterseniz, benimle iletişime geçebilirsiniz.
 
-## 📝 Değişiklik Günlüğü
+## 📝 [Değişiklik Günlüğü](CHANGELOG.md)
 
-### Version 0.0.1-SNAPSHOT
-🚀 Projenin ilk temelleri atıldı.
 
-### Version 0.0.2-SNAPSHOT
-- **Frontend** güncellendi
-- **Add Package** servisi güncellendi
-- **Search Package** servisi düzenlendi
-- **Error Response** içindeki "detail" kaldırıldı
-- **Upload Package** controller'ı düzenlendi  
-### version 0.0.3
-dependencieler eklendi# rpms-server

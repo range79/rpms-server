@@ -1,23 +1,20 @@
-package com.range.rpms.dao.model;
+package com.range.rpms.dto.pkg;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "packages")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PackageEntity {
-    @Id
+public class PackageMetaData {
+
     private String id;
     private String name;
     private String description;
     private String author;
-    private double version;
-    private byte[] content;
+    private Double version;
+
 }

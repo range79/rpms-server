@@ -1,11 +1,11 @@
-package com.range.rpms.dto;
+package com.range.rpms.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class LoginRequestDto {
+@Getter
+public class UserLoginRequest {
     private String username;
     private String password;
 }

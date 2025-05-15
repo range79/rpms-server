@@ -14,13 +14,13 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
 
-    return new OpenAPI()
-            .info(new Info().title("Range Package Manager Server")
-                    .description("A Server for managing packages")
-                    .version("v0.0.1")
-                    .license(new License().name("Apache 2.0").url("https://springdoc.org")))
-            .externalDocs(new ExternalDocumentation()
-                    .description("GIthub")
-                    .url("https://github.com/range79/rpms-server"));
-}
+        return new OpenAPI()
+                .info(new Info().title("Range Package Manager Server")
+                        .description("A Server for managing packages")
+                        .version("v1.0.0")
+                        .license(new License().name("Apache 2.0").url("https://springdoc.org")))
+                .externalDocs(new ExternalDocumentation()
+                        .description("GIthub")
+                        .url("https://github.com/range79/rpms-server"));
+    }
 }
