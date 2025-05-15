@@ -1,69 +1,122 @@
-# 🌟 **Range Package Manager - Open Source Backend** 🌟
+# 🌟 Range Package Manager - Open Source Backend
 
-**Range Package Manager**, yazılım paketlerini yönetmek için geliştirilmiş bir açık kaynaklı projedir. Bu projenin backend tarafı, modern ve ölçeklenebilir bir yapı oluşturmak için tasarlanmıştır. Şu an geliştirme aşamasında olan bu backend, Range Package Manager uygulamasının sunucu tarafı hizmetlerini sağlamak amacıyla MongoDB, MapStruct, Thymeleaf ve Gradle gibi güçlü teknolojiler kullanılarak geliştirilmiştir.
+**Range Package Manager** is an open-source backend project built for managing software packages. Designed with a scalable and modular architecture, this backend serves as the server-side component of the Range Package Manager ecosystem. It leverages technologies like **MongoDB**, **MapStruct**, **Thymeleaf**, and **Gradle** to provide a reliable, flexible, and developer-friendly environment.
 
-Ben bir **junior developer** olarak bu projeyi başlatmış bulunuyorum ve bu süreçte öğrenmeye devam ediyorum. Projeye katkı sağlamak isteyen herkese kapım açık ve her türlü yardımı memnuniyetle kabul ediyorum. Eğer bu projeye katkıda bulunmak isterseniz, Pull Request göndererek katkılarınızı paylaşabilirsiniz. 🙌
+---
 
-## 🔧 Proje Hakkında
+## 🔧 About the Project
 
-**Range Package Manager** backend'i, yazılım paketlerinin yönetimini kolaylaştırmak ve kullanıcıların bu paketleri etkili bir şekilde yönetmelerini sağlamak amacıyla geliştirilmiştir. Proje şu anda aktif olarak geliştirilmekte olup, ilk sürümü üzerinde çalışmalar devam etmektedir. Projeye yapılan katkılar ve geri bildirimler, daha stabil ve sağlam bir sistemin inşasına yardımcı olacaktır. ⚙️
+The backend system of **Range Package Manager** enables users to upload, search, retrieve, and delete packages via a RESTful API and an admin panel interface. The project is under active development and aims to become a robust and modern package management platform.
 
-### 💻 Kullanılan Teknolojiler
+Feedback and contributions are always welcome to help improve the project and accelerate its progress.
 
-Bu backend uygulamasında kullanılan başlıca teknolojiler şunlardır:
+---
 
-- **Veritabanı**: [MongoDB](https://www.mongodb.com/)  
-  MongoDB, veri depolama ve yönetim için kullanılan NoSQL veritabanıdır. Projemizde MongoDB, kullanıcı ve paket bilgilerini esnek bir şekilde depolamak amacıyla kullanılmaktadır. 📊
+## 💻 Technologies Used
 
-- **Model Mapping**: [MapStruct](https://mapstruct.org/)  
-  MapStruct, Java bean'leri arasındaki dönüşüm işlemlerini kolaylaştıran bir kütüphanedir. Veritabanı modelleri ile DTO'lar (Data Transfer Object) arasındaki dönüşümleri kolayca gerçekleştirmek için kullanılmıştır. 🔄
+- **MongoDB** – Flexible and scalable NoSQL database
+- **Spring Boot** – Framework for building robust web and REST APIs
+- **Thymeleaf** – Server-side rendering engine for dynamic HTML templates
+- **MapStruct** – Java bean mapping framework for DTO <-> entity conversion
+- **Gradle** – Build tool for dependency and project management
+- **Spring Security & JWT** – Secure authentication and authorization system
+- **Swagger (OpenAPI)** – Interactive and auto-generated API documentation
 
-- **Template Engine**: [Thymeleaf](https://www.thymeleaf.org/)  
-  Thymeleaf, Java tabanlı dinamik HTML sayfaları oluşturmak için kullanılan güçlü bir template engine'dir. Bu projede kullanıcı arayüzlerini sunmak için Thymeleaf tercih edilmiştir. 🖥️
+---
 
-- **Build Sistemi**: [Gradle](https://gradle.org/)  
-  Gradle, projelerin derlenmesi ve yönetilmesi için kullanılan modern bir build sistemidir. Range Package Manager backend projesinde Gradle kullanılarak derleme ve bağımlılık yönetimi sağlanmaktadır. 🔨
+## 📈 Project Status
 
-### 📅 Proje Durumu
+The project is currently in **active development**. Existing features include:
 
-Bu proje şu an geliştirme aşamasında olup, ilk sürüm için önemli adımlar atılmıştır. Proje hala erken aşamada olduğu için bazı eksiklikler ve iyileştirme alanları mevcuttur. Ancak, projeye katkı sağlamak isteyenler için açık bir şekilde geliştirilmeye devam edilmektedir. Katkılarınız, projenin daha hızlı olgunlaşmasına yardımcı olacaktır. 🚀
+- Package upload and metadata storage
+- REST API and admin panel integration
+- Swagger-based API documentation
+- Basic authentication via JWT
+- Error handling and exception mapping
 
-## 🤝 Katkı Sağlamak
+For a detailed list of updates, see [CHANGELOG.md](CHANGELOG.md).
 
-Bu projeyi bir **junior developer** olarak başlattım ve bu süreçte çok şey öğreniyorum. Projeyi daha iyi hale getirmek için katkılarınızı bekliyorum. Eğer projenin backend tarafına katkıda bulunmak, yeni özellikler eklemek veya mevcut hataları düzeltmek isterseniz, **Pull Request** gönderebilirsiniz. 💡
+---
 
-Tüm gelen pull request'leri inceleyeceğim ve uygun gördüğüm değişiklikleri projeye dahil edeceğim. Her türlü geri bildirim ve öneriye de açığım. Bu proje sayesinde daha fazla öğrenmek ve daha iyi bir yazılım geliştiricisi olmak amacındayım, dolayısıyla yardımlarınız çok değerli. 🙏
+## 🤝 Contributing
 
-## 📝 Katkı Adımları
+Community contributions are highly appreciated!  
+To contribute:
 
-Projeye katkıda bulunmak çok kolaydır, sadece şu adımları takip etmeniz yeterli:
+1. Fork the repository 🍴  
+2. Create a new branch (`feature/your-feature` or `bugfix/your-fix`)  
+3. Commit your changes with clear messages  
+4. Submit a Pull Request 📤  
 
-1. **Fork** yaparak projenin kendi kopyanızı oluşturun. 🍴
-2. Kendi kopyanızda gerekli değişiklikleri yapın. Eğer yeni bir özellik ekliyorsanız, uygun testleri de yazın. ✨
-3. Yeni yaptığınız değişiklikleri açıklayan bir commit mesajıyla **Pull Request** gönderin. 📤
+Make sure your code is readable, tested (where applicable), and well-documented.
 
-**Not**: Pull Request gönderdiğinizde, yapılan değişikliklerin açık ve anlaşılır olduğundan emin olun. İyi açıklamalar ve yorumlar, inceleme sürecini hızlandırır ve katkılarınızın projeye dahil edilmesini kolaylaştırır. ✔️
+---
 
-## ✅ Yapılacaklar
 
-Bu projede hala yapılacak birçok şey var. İlk sürüm biraz eksik olabilir, ancak zamanla geliştirilip daha sağlam hale getirilecektir. Yapılacaklar listesi şunları içermektedir:
+## ⚙️ Configuration Example
 
-- **Yeni özellikler eklenmesi**: Kullanıcı arayüzü iyileştirmeleri ve yeni işlevsellikler eklenmesi.
-- **Hata düzeltmeleri ve iyileştirmeler**: Kodun daha verimli ve hatasız hale getirilmesi.
-- **Performans iyileştirmeleri**: Veritabanı ve işlem süresi optimizasyonları.
-## 📬 İletişim
-Bu proje hakkında daha fazla bilgi almak veya katkıda bulunmak isterseniz, benimle iletişime geçebilirsiniz.
+Below is an example `application.yml` configuration:
 
-## 📝 Değişiklik Günlüğü
+```yaml
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: your-db-name
+  thymeleaf:
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
 
-### Version 0.0.1-SNAPSHOT
-🚀 Projenin ilk temelleri atıldı.
+springdoc:
+  api-docs:
+    enabled: true
 
-### Version 0.0.2-SNAPSHOT
-- **Frontend** güncellendi
-- **Add Package** servisi güncellendi
-- **Search Package** servisi düzenlendi
-- **Error Response** içindeki "detail" kaldırıldı
-- **Upload Package** controller'ı düzenlendi  
-### version 0.0.3
-dependencieler eklendi# rpms-server
+app:
+  jwt-secret: your-secret-key
+  jwt-duration: 22
+````
+
+---
+
+## 🐳 Docker Compose Support
+
+A basic `docker-compose.yml` file is included for setting up MongoDB:
+
+```yaml
+services:
+  mongodb:
+    image: 'mongo:latest'
+    environment:
+      - MONGO_INITDB_DATABASE=something
+      - MONGO_INITDB_ROOT_USERNAME=yourusername
+      - MONGO_INITDB_ROOT_PASSWORD=yourpass
+    ports:
+      - '27017:27017'
+```
+
+To start MongoDB locally, run:
+
+```bash
+docker-compose up -d
+```
+
+---
+
+## 📬 Contact
+
+For feedback, contributions, or questions, feel free to open an issue or submit a pull request. All help is welcome!
+
+---
+
+## 📝 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for full version history and updates.
+
+
+

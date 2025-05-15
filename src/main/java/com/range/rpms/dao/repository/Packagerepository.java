@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 @Repository
-public interface Packagerepo extends MongoRepository<PackageEntity, String> {
+public interface Packagerepository extends MongoRepository<PackageEntity, String> {
 
 
     Optional<PackageEntity> findByName(String packageName);

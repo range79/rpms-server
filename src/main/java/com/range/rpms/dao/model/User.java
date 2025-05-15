@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "packages")
@@ -12,12 +12,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PackageEntity {
-    @Id
+public class User  {
     private String id;
-    private String name;
-    private String description;
-    private String author;
-    private double version;
-    private byte[] content;
+    @Indexed(unique = true)
+    private String username;
+    private String password;
+    @Indexed(unique = true)
+    private String email;
+    private Role role;
 }
