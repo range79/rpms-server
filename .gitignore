@@ -35,5 +35,5 @@ out/
 
 ### VS Code ###
 .vscode/
-compose.yaml
+compose.yml
 src/main/resources/application.yaml

@@ -119,4 +119,9 @@ For feedback, contributions, or questions, feel free to open an issue or submit 
 See [CHANGELOG.md](CHANGELOG.md) for full version history and updates.
 
 
+# Contributors
+
+👥 See the full list of amazing contributors [here](CONTRIBUTORS.md).
+
+
 

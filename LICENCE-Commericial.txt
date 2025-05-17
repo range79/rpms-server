@@ -1,0 +1,10 @@
+Commercial Licensing
+
+For commercial usage or closed-source distribution of this software,
+you must obtain a commercial license from the author.
+
+Please contact:
+  Azad — darkrange6@gmail.com
+
+You may NOT use this software in proprietary environments without
+explicit written permission and licensing.

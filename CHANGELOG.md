@@ -54,3 +54,73 @@ Once the issue is fixed, the login functionality and admin panel HTML will be co
 * JWT filter is now working
 * Renamed `ApiResponse` to `GenericResponse` due to a naming conflict with Swagger
 
+
+
+
+### 📦 Version 2.0.0 – Early Beta
+
+> ⚠️ This is an early beta release. Major architectural improvements have been introduced. The system now supports dual database configuration. Some modules are still under development.
+
+---
+
+#### 🚀 Major Changes
+
+* **PostgreSQL Added (Dual DB Setup)**
+  PostgreSQL has been integrated alongside MongoDB.
+  The `users` table and all security-related data are now stored in PostgreSQL for enhanced safety and relational structure.
+
+* **JPA Integration**
+  Java Persistence API (JPA) is now used for handling PostgreSQL entities.
+
+* **PostgreSQL Driver Added**
+  JDBC driver for PostgreSQL has been added to the project dependencies.
+
+* **Admin PackageService Implemented**
+  A new service and its implementation were added for administrative package operations.
+
+---
+
+#### 🛠 New Features
+
+* **FileExtensionUtil**
+  Utility for validating and managing supported file types during package upload.
+
+* **UserProfile Entity**
+  A new entity to store user-specific metadata like avatar, bio, birth date, and social links.
+
+* **Friend Request System Introduced**
+
+    * `FriendRequest` entity
+    * `FriendRequestStatus` enum
+    * `FriendRequestException` for custom error handling
+
+* **PackageVisibility Enum**
+  Enum introduced to define visibility status of packages:
+
+    * `PUBLIC`: Visible to everyone
+    * `PRIVATE`: Only visible to the author
+    * `ONLY_FRIENDS`: Visible only to the author’s friends
+
+* **UserMetadata DTO**
+  A DTO for exposing minimal user data to the frontend in a clean and secure way.
+
+---
+
+#### 🧼 Refactoring & Improvements
+
+* **Controller Refactor**
+  The package controller was split into:
+
+    * `AdminPackageController`
+    * `UserPackageController`
+
+* **Enum Refactor**
+  All enums have been moved to a dedicated package (`com.range.rpms.enums`) for better maintainability.
+
+---
+
+#### 🌐 Frontend Initialization
+
+* Initial frontend layout created
+* Thanks to **Selin Yakup** for contributing to the frontend setup 💫
+
