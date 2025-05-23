@@ -4,7 +4,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SpringSecurityUserContextUtil implements UserContext {
+public class UserContextUtil implements UserContext {
     @Override
     public String getCurrentUserName() {
         return SecurityContextHolder.

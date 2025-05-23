@@ -6,14 +6,12 @@ import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.dto.UploadPackageRequest;
 import com.range.rpms.packages.exception.*;
 import com.range.rpms.packages.mapper.PackageMapper;
-import com.range.rpms.common.util.SpringSecurityUserContextUtil;
+import com.range.rpms.common.util.UserContextUtil;
 import com.range.rpms.packages.service.PackageService;
 import com.range.rpms.common.util.FileExtensionUtil;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.IOException;
 
 @Service
 public class PackageServiceImpl implements PackageService {
@@ -21,10 +19,10 @@ public class PackageServiceImpl implements PackageService {
     private final PackageRepository packagerepository;
     private final PackageMapper packageMapper;
 
-    private final SpringSecurityUserContextUtil springSecurityUserContextUtil;
+    private final UserContextUtil springSecurityUserContextUtil;
     public PackageServiceImpl(PackageRepository packagerepository
             , PackageMapper packageMapper
-            , SpringSecurityUserContextUtil springSecurityUserContextUtil) {
+            , UserContextUtil springSecurityUserContextUtil) {
         this.packagerepository = packagerepository;
         this.packageMapper = packageMapper;
         this.springSecurityUserContextUtil = springSecurityUserContextUtil;

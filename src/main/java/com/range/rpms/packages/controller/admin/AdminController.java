@@ -2,12 +2,15 @@ package com.range.rpms.packages.controller.admin;
 
 import com.range.rpms.common.dto.GenericResponse;
 import com.range.rpms.packages.api.admin.AdminPackageApi;
+import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.exception.PackageNotFoundException;
 import com.range.rpms.packages.service.AdminPackageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 
@@ -40,8 +43,15 @@ public class AdminController implements AdminPackageApi {
         );
     }
 
-
-
+    @Override
+    public ResponseEntity<GenericResponse<List<PackageMetaData>>> getAllPackages() {
+       return ResponseEntity.ok(new GenericResponse<>(
+               true,
+               "All packages Fetched",
+               HttpStatus.OK.value(),
+                adminPackageService.getAllPackages()
+       ));
+    }
 
 
 }

@@ -124,3 +124,26 @@ Once the issue is fixed, the login functionality and admin panel HTML will be co
 * Initial frontend layout created
 * Thanks to **Selin Yakup** for contributing to the frontend setup 💫
 
+
+
+### 📦 Version 2.0.0 – Early Beta 2
+
+#### 🆕 New Features
+
+* Added the `api` module to the project.
+* Implemented user settings functionality.
+* Added user profile support.
+
+#### 🛠️ Structural Changes
+
+* Refactored the overall project architecture.
+* Modularized package structure.
+* Made improvements to the package service.
+
+#### 🧹 Cleanup
+
+* Reduced Swagger annotations due to excessive clutter in the codebase.
+
+#### ⚠️ Known Issues
+
+* Several controllers are currently non-functional due to architectural changes. Fixes are planned.

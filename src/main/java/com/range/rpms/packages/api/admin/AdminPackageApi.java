@@ -1,14 +1,17 @@
 package com.range.rpms.packages.api.admin;
 
 import com.range.rpms.common.dto.GenericResponse;
+import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.exception.PackageNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "Admin Package API", description = "Admin operations for managing packages")
-@RequestMapping("/admin/packages")
+@RequestMapping("/packages/admin")
 public interface AdminPackageApi {
 
     @Operation(
@@ -24,4 +27,14 @@ public interface AdminPackageApi {
     )
     @DeleteMapping("/all")
     ResponseEntity<GenericResponse<Void>> deleteAllPackages() throws PackageNotFoundException;
+
+
+    @Operation(
+            summary = "Get all packages in this app",
+            description = "Returns a list of packages uploaded users"
+    )
+    @GetMapping("/all")
+    ResponseEntity<GenericResponse<List<PackageMetaData>>> getAllPackages();
+
+
 }

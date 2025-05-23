@@ -1,16 +1,19 @@
 package com.range.rpms.packages.service.impl;
 
 import com.range.rpms.common.util.FileExtensionUtil;
-import com.range.rpms.common.util.SpringSecurityUserContextUtil;
+import com.range.rpms.common.util.UserContext;
+import com.range.rpms.common.util.UserContextUtil;
 import com.range.rpms.packages.dao.model.PackageEntity;
 import com.range.rpms.packages.dao.repository.PackageRepository;
 import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.dto.UploadPackageRequest;
+import com.range.rpms.packages.enums.PackageVisibility;
 import com.range.rpms.packages.exception.CantDownGradePackageException;
 import com.range.rpms.packages.exception.PackageNotFoundException;
 import com.range.rpms.packages.exception.UnsupportedFileException;
 import com.range.rpms.packages.exception.UserNotOwnerOfPackageException;
 import com.range.rpms.packages.mapper.PackageMapper;
+import com.range.rpms.packages.mapper.PackageVisibilityMapper;
 import com.range.rpms.packages.service.MyPackageService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,38 +23,36 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Service
 public class MyPackageServiceImpl implements MyPackageService {
-    private PackageRepository packageRepository;
-    private SpringSecurityUserContextUtil springSecurityUserContextUtil;
-    private PackageMapper packageMapper;
+    private final PackageRepository packageRepository;
+    private final UserContext currentUser;
+    private final PackageMapper packageMapper;
     public MyPackageServiceImpl(PackageRepository packageRepository,
-                                SpringSecurityUserContextUtil springSecurityUserContextUtil,
+                                UserContextUtil currentUser,
                                 PackageMapper packageMapper ) {
         this.packageRepository = packageRepository;
-        this.springSecurityUserContextUtil = springSecurityUserContextUtil;
+        this.currentUser = currentUser;
         this.packageMapper = packageMapper;
     }
 
 
     @Override
     public void deleteMyAllPackages() {
-
-    }
-
-    @Override
-    public void deletePackageById(String id) throws PackageNotFoundException {
-        String currentUserName = springSecurityUserContextUtil.getCurrentUserName();
-
+        String currentUserName = currentUser.getCurrentUserName();
         packageRepository.deleteByAuthor(currentUserName);
     }
 
     @Override
-    public PackageMetaData getPackageById(String packageId) throws PackageNotFoundException {
-        return null;
+    public void deletePackageById(String id) throws PackageNotFoundException {
+        String currentUserName = currentUser.getCurrentUserName();
+
+        packageRepository.deleteByAuthor(currentUserName);
     }
+
+
 
     @Override
     public List<PackageMetaData> getAllPackages() {
-        String currentUserName = springSecurityUserContextUtil.getCurrentUserName();
+        String currentUserName = currentUser.getCurrentUserName();
         List<PackageEntity> entities = packageRepository.findByAuthor(currentUserName);
 
         return  entities.stream()
@@ -72,7 +73,7 @@ public class MyPackageServiceImpl implements MyPackageService {
                 .orElseThrow(()->new PackageNotFoundException("Package "+id+" not found"));
 
         //get User id which perform this method
-        String holderId = springSecurityUserContextUtil.getCurrentUserName();
+        String holderId = currentUser.getCurrentUserName();
 
 
         if (!holderId.equals(packageEntity.getAuthor())){
@@ -96,5 +97,20 @@ public class MyPackageServiceImpl implements MyPackageService {
         packageEntity.setContent(uploadPackageRequest.getFile().getBytes());
         return packageMapper.toPackageMetaData(packageRepository.save(packageEntity));
 
+    }
+
+    @Override
+    public void setPackageVisibility(String packageId, int visibilityCode) throws PackageNotFoundException {
+        String currentUserName = currentUser.getCurrentUserName();
+
+        PackageEntity entity = packageRepository.findById(packageId)
+                .orElseThrow(()->new PackageNotFoundException("Package "+packageId+" not found"));
+        if (!entity.getAuthor().equals(currentUserName)){
+            throw new UserNotOwnerOfPackageException("User not owner of package "+packageId);
+        }
+        PackageVisibility visibility = PackageVisibilityMapper.getPackageVisibility(visibilityCode);
+
+        entity.setPackageVisibility(visibility);
+        packageRepository.save(entity);
     }
 }

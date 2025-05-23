@@ -15,7 +15,7 @@ public class GenericResponse<T> {
     @Schema(description = "Optional message")
     private String message;
 
-    @Schema(description = "HTTP status code")
+    @Schema(description = "HTTP status code",examples = {"200","500"})
     private int statusCode;
 
     @Schema(description = "Returned data", implementation = Object.class)

@@ -26,7 +26,7 @@ public class FriendRequest {
     private String senderName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reciver_id")
+    @JoinColumn(name = "receiver_id")
     private User receiver;
 
     private String receiverName;

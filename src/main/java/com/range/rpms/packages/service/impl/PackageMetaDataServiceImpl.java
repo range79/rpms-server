@@ -1,12 +1,11 @@
 package com.range.rpms.packages.service.impl;
 
-import com.range.rpms.packages.dao.model.PackageEntity;
 import com.range.rpms.packages.dao.repository.PackageRepository;
 import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.exception.PackageNotFoundException;
 import com.range.rpms.packages.mapper.PackageMapper;
 import com.range.rpms.packages.service.PackageMetaDataService;
-import com.range.rpms.common.util.SpringSecurityUserContextUtil;
+import com.range.rpms.common.util.UserContextUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +16,11 @@ public class PackageMetaDataServiceImpl implements PackageMetaDataService {
     private final PackageRepository packagerepository;
 
     private final PackageMapper packageMapper;
-    private final SpringSecurityUserContextUtil springSecurityUserContextUtil;
+    private final UserContextUtil springSecurityUserContextUtil;
 
     public PackageMetaDataServiceImpl(PackageRepository packagerepository,
                                       PackageMapper packageMapper,
-                                      SpringSecurityUserContextUtil springSecurityUserContextUtil
+                                      UserContextUtil springSecurityUserContextUtil
     ) {
         this.springSecurityUserContextUtil = springSecurityUserContextUtil;
         this.packagerepository = packagerepository;
@@ -36,6 +35,7 @@ public class PackageMetaDataServiceImpl implements PackageMetaDataService {
     @Override
     public List<PackageMetaData> getAllPackages() {
         //find all packages from db
+        //todo l will fix it LATER
         return packagerepository
                 //findAll
                 .findAll()

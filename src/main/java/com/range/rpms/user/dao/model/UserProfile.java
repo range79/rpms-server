@@ -3,9 +3,9 @@ package com.range.rpms.user.dao.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "user_profile")
 @Getter
@@ -21,6 +21,7 @@ public class UserProfile {
     private String bio;
 
     private String avatarUrl;
+
     private LocalDate birthDate;
 
     private String location;
@@ -32,8 +33,4 @@ public class UserProfile {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
-
-
-
-
 }

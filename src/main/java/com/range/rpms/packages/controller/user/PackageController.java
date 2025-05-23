@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-
 public class PackageController implements PackageApi {
     private final PackageService packageService;
 
