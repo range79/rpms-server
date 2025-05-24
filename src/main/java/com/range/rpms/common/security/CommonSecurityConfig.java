@@ -13,11 +13,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class CommonSecurityConfig {
 
     private final JwtFilter jwtFilter;
 
-    public SecurityConfig(JwtFilter jwtFilter) {
+    public CommonSecurityConfig(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
     }
 
@@ -37,30 +37,13 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .authorizeHttpRequests(auth -> auth
-
                         .requestMatchers("/login",
                                 "/swagger",
                                 "v3/api-docs",
                                 "/css/**",
                                 "/js/**",
-                                "/images/**",
-                                "/register",
-                                "auth/register",
-                                "auth/login"
+                                "/images/**"
                         ).permitAll()
-
-                        .requestMatchers("/info/all",
-                                "packages/delete/all",
-                                "packages/delete/"
-                                //for now l set it admin but l will change it in new version
-
-                        ).hasRole("ADMIN")
-
-
-
-.requestMatchers("/").hasRole("USER")
-
-
                         .anyRequest().permitAll()
                 );
 
