@@ -57,93 +57,102 @@ Once the issue is fixed, the login functionality and admin panel HTML will be co
 
 
 
-### 📦 Version 2.0.0 – Early Beta
 
-> ⚠️ This is an early beta release. Major architectural improvements have been introduced. The system now supports dual database configuration. Some modules are still under development.
+
+### 📦 Version 2.0.0 – Beta
+
+> ✅ This is the official beta release introducing major architectural changes and dual database support. The system has been modularized, and several new features have been implemented.
+> ⚠️ Some modules (like package-level security) are still in progress.
 
 ---
 
 #### 🚀 Major Changes
 
-* **PostgreSQL Added (Dual DB Setup)**
+* **Dual Database Support (PostgreSQL + MongoDB)**
   PostgreSQL has been integrated alongside MongoDB.
-  The `users` table and all security-related data are now stored in PostgreSQL for enhanced safety and relational structure.
+
+  * All `users` and security-related data are now stored in PostgreSQL.
+  * MongoDB remains in use for flexible, document-oriented data such as packages.
 
 * **JPA Integration**
-  Java Persistence API (JPA) is now used for handling PostgreSQL entities.
+  Java Persistence API (JPA) is now used to manage PostgreSQL entities.
 
-* **PostgreSQL Driver Added**
-  JDBC driver for PostgreSQL has been added to the project dependencies.
-
-* **Admin PackageService Implemented**
-  A new service and its implementation were added for administrative package operations.
+* **PostgreSQL JDBC Driver Added**
+  PostgreSQL driver has been added to the project dependencies.
 
 ---
 
-#### 🛠 New Features
+#### 🧩 Architecture & Structural Improvements
 
-* **FileExtensionUtil**
-  Utility for validating and managing supported file types during package upload.
+* **Modular Project Structure**
+  The overall architecture was redesigned and modularized for better maintainability.
+  The `api` module has been introduced to separate external interface logic.
 
-* **UserProfile Entity**
-  A new entity to store user-specific metadata like avatar, bio, birth date, and social links.
+* **Controller Refactoring**
+  Package controllers were split for cleaner responsibility separation:
 
-* **Friend Request System Introduced**
-
-    * `FriendRequest` entity
-    * `FriendRequestStatus` enum
-    * `FriendRequestException` for custom error handling
-
-* **PackageVisibility Enum**
-  Enum introduced to define visibility status of packages:
-
-    * `PUBLIC`: Visible to everyone
-    * `PRIVATE`: Only visible to the author
-    * `ONLY_FRIENDS`: Visible only to the author’s friends
-
-* **UserMetadata DTO**
-  A DTO for exposing minimal user data to the frontend in a clean and secure way.
-
----
-
-#### 🧼 Refactoring & Improvements
-
-* **Controller Refactor**
-  The package controller was split into:
-
-    * `AdminPackageController`
-    * `UserPackageController`
+  * `AdminPackageController`
+  * `UserPackageController`
 
 * **Enum Refactor**
-  All enums have been moved to a dedicated package (`com.range.rpms.enums`) for better maintainability.
+  All enums have been moved to a dedicated package: `com.range.rpms.enums`
+
+---
+
+#### 🆕 New Features
+
+* **AdminPackageService**
+  A new service for administrative-level package operations.
+
+* **FileExtensionUtil**
+  Utility class to validate and manage file types during package uploads.
+
+* **UserProfile Entity**
+  New entity to store user-related metadata such as avatar, bio, birth date, and social links.
+
+* **Friend Request System**
+  Social features added with support for:
+
+  * `FriendRequest` entity
+  * `FriendRequestStatus` enum
+  * Custom error handling with `FriendRequestException`
+
+* **PackageVisibility Enum**
+  New visibility options for packages:
+
+  * `PUBLIC`: Visible to everyone
+  * `PRIVATE`: Only visible to the author
+  * `ONLY_FRIENDS`: Visible only to the author's friends
+
+* **UserMetadata DTO**
+  A lightweight and secure data transfer object for exposing public user info to the frontend.
+
+* **User Settings Functionality**
+  Users can now update their personal settings (e.g., profile info, preferences).
 
 ---
 
 #### 🌐 Frontend Initialization
 
-* Initial frontend layout created
-* Thanks to **Selin Yakup** for contributing to the frontend setup 💫
+* Initial layout and component setup completed.
+* 💫 Special thanks to **Selin Yakup** for contributing to the frontend!
 
+---
 
+#### 🧼 Cleanup & Code Improvements
 
-### 📦 Version 2.0.0 – Early Beta 2
+* Reduced excessive Swagger annotations for cleaner code.
+* Improved package service functionality.
+* Performed general code cleanup and reorganization.
 
-#### 🆕 New Features
-
-* Added the `api` module to the project.
-* Implemented user settings functionality.
-* Added user profile support.
-
-#### 🛠️ Structural Changes
-
-* Refactored the overall project architecture.
-* Modularized package structure.
-* Made improvements to the package service.
-
-#### 🧹 Cleanup
-
-* Reduced Swagger annotations due to excessive clutter in the codebase.
+---
 
 #### ⚠️ Known Issues
 
-* Several controllers are currently non-functional due to architectural changes. Fixes are planned.
+* **Security on Packages Not Yet Implemented**
+  Package-level access control (e.g., private/friends-only access) is planned but not yet functional.
+
+* **Controller Compatibility Issues**
+  Some controllers are temporarily non-functional due to ongoing architectural changes. Fixes are scheduled.
+
+---
