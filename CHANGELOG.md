@@ -56,103 +56,67 @@ Once the issue is fixed, the login functionality and admin panel HTML will be co
 
 
 
+# 📦 Range Package Manager 2.0.0 – Stable Release Notes
 
-
-
-### 📦 Version 2.0.0 – Beta
-
-> ✅ This is the official beta release introducing major architectural changes and dual database support. The system has been modularized, and several new features have been implemented.
-> ⚠️ Some modules (like package-level security) are still in progress.
+> This release finalizes the major architectural changes, introduces dual database support, and implements new social features in a fully stable and secure manner. All security configurations have been integrated and tested, ensuring production readiness.
 
 ---
 
-#### 🚀 Major Changes
+## 🚀 Major Changes
 
-* **Dual Database Support (PostgreSQL + MongoDB)**
-  PostgreSQL has been integrated alongside MongoDB.
-
-  * All `users` and security-related data are now stored in PostgreSQL.
-  * MongoDB remains in use for flexible, document-oriented data such as packages.
-
-* **JPA Integration**
-  Java Persistence API (JPA) is now used to manage PostgreSQL entities.
-
-* **PostgreSQL JDBC Driver Added**
-  PostgreSQL driver has been added to the project dependencies.
+* PostgreSQL and MongoDB now work seamlessly side-by-side.
+* PostgreSQL handles all user and security data via JPA, while MongoDB manages flexible package data.
+* JPA integration ensures efficient and stable database operations.
 
 ---
 
-#### 🧩 Architecture & Structural Improvements
+## 🧩 Architecture & Structural Improvements
 
-* **Modular Project Structure**
-  The overall architecture was redesigned and modularized for better maintainability.
-  The `api` module has been introduced to separate external interface logic.
-
-* **Controller Refactoring**
-  Package controllers were split for cleaner responsibility separation:
-
-  * `AdminPackageController`
-  * `UserPackageController`
-
-* **Enum Refactor**
-  All enums have been moved to a dedicated package: `com.range.rpms.enums`
+* Project is modularized with clear separation of concerns.
+* Controllers are refactored and responsibilities are split (e.g., AdminPackageController, UserPackageController).
+* Enums and common utilities are centralized in dedicated packages.
+* New services like AdminPackageService are fully operational.
 
 ---
 
-#### 🆕 New Features
+## 🆕 New Features
 
-* **AdminPackageService**
-  A new service for administrative-level package operations.
-
-* **FileExtensionUtil**
-  Utility class to validate and manage file types during package uploads.
-
-* **UserProfile Entity**
-  New entity to store user-related metadata such as avatar, bio, birth date, and social links.
-
-* **Friend Request System**
-  Social features added with support for:
-
-  * `FriendRequest` entity
-  * `FriendRequestStatus` enum
-  * Custom error handling with `FriendRequestException`
-
-* **PackageVisibility Enum**
-  New visibility options for packages:
-
-  * `PUBLIC`: Visible to everyone
-  * `PRIVATE`: Only visible to the author
-  * `ONLY_FRIENDS`: Visible only to the author's friends
-
-* **UserMetadata DTO**
-  A lightweight and secure data transfer object for exposing public user info to the frontend.
-
-* **User Settings Functionality**
-  Users can now update their personal settings (e.g., profile info, preferences).
+* User profile management including avatars, bios, and social links.
+* Friend request system with proper status handling and custom exceptions.
+* Package visibility options: PUBLIC, PRIVATE, and ONLY\_FRIENDS.
+* User metadata DTO for secure and optimized frontend communication.
+* User settings functionality allowing profile and preference updates.
 
 ---
 
-#### 🌐 Frontend Initialization
+## 🔒 Security
 
-* Initial layout and component setup completed.
-* 💫 Special thanks to **Selin Yakup** for contributing to the frontend!
-
----
-
-#### 🧼 Cleanup & Code Improvements
-
-* Reduced excessive Swagger annotations for cleaner code.
-* Improved package service functionality.
-* Performed general code cleanup and reorganization.
+* All API endpoints are secured with robust authentication and authorization mechanisms.
+* JWT-based authentication is fully integrated and tested.
+* Package-level access control is implemented for different visibility levels.
+* Modular `SecurityFilterChain` ensures tailored security policies per module.
 
 ---
 
-#### ⚠️ Known Issues
+## 🧹 Code Cleanup & Performance
 
-* **Security on Packages Not Yet Implemented**
-  Package-level access control (e.g., private/friends-only access) is planned but not yet functional.
-
-* **Controller Compatibility Issues**
-  Some controllers are temporarily non-functional due to ongoing architectural changes. Fixes are scheduled.
+* Codebase optimized for maintainability and clarity.
+* Swagger annotations reduced for cleaner API documentation.
+* Unused dependencies removed for faster builds and runtime.
 
 ---
+
+## 🌐 Frontend Integration (Planned)
+
+* Initial backend API support is prepared for frontend consumption.
+* A modern frontend client will be developed and integrated in future releases to enhance user experience and interface.
+
+---
+
+## ✅ Known Issues
+
+* No critical issues currently reported.
+* Minor improvements will be addressed in upcoming patch releases based on user feedback.
+
+
+
