@@ -54,3 +54,77 @@ Once the issue is fixed, the login functionality and admin panel HTML will be co
 * JWT filter is now working
 * Renamed `ApiResponse` to `GenericResponse` due to a naming conflict with Swagger
 
+
+
+# 📦 Range Package Manager 2.0.0 – Stable Release Notes
+
+> This release finalizes the major architectural changes, introduces dual database support, and implements new social features in a fully stable and secure manner. All security configurations have been integrated and tested, ensuring production readiness.
+
+---
+
+## 🚀 Major Changes
+
+* PostgreSQL and MongoDB now work seamlessly side-by-side.
+* PostgreSQL handles all user and security data via JPA, while MongoDB manages flexible package data.
+* JPA integration ensures efficient and stable database operations.
+
+---
+
+## 🧩 Architecture & Structural Improvements
+
+* Project is modularized with clear separation of concerns.
+* Controllers are refactored and responsibilities are split (e.g., AdminPackageController, UserPackageController).
+* Enums and common utilities are centralized in dedicated packages.
+* New services like AdminPackageService are fully operational.
+
+---
+
+## 🆕 New Features
+
+* User profile management including avatars, bios, and social links.
+* Friend request system with proper status handling and custom exceptions.
+* Package visibility options: PUBLIC, PRIVATE, and ONLY\_FRIENDS.
+* User metadata DTO for secure and optimized frontend communication.
+* User settings functionality allowing profile and preference updates.
+
+---
+
+## 🔒 Security
+
+* All API endpoints are secured with robust authentication and authorization mechanisms.
+* JWT-based authentication is fully integrated and tested.
+* Package-level access control is implemented for different visibility levels.
+* Modular `SecurityFilterChain` ensures tailored security policies per module.
+
+---
+
+## 🧹 Code Cleanup & Performance
+
+* Codebase optimized for maintainability and clarity.
+* Swagger annotations reduced for cleaner API documentation.
+* Unused dependencies removed for faster builds and runtime.
+
+---
+
+## 🌐 Frontend Integration (Planned)
+
+* Initial backend API support is prepared for frontend consumption.
+* A modern frontend client will be developed and integrated in future releases to enhance user experience and interface.
+
+---
+
+## ✅ Known Issues
+
+* No critical issues currently reported.
+* Minor improvements will be addressed in upcoming patch releases based on user feedback.
+
+
+
+## 📜 License Change Notice
+
+Starting from **version 2.0.0**, the project license has been changed from **Apache License** to **GNU General Public License v3.0 (GPL-3.0)**.
+
+* This change aims to promote **strong copyleft** principles, ensuring that all derivative works remain open source under the same license.
+* Users and contributors must comply with the terms of GPL-3.0 from this version onwards.
+* Previous versions remain under the Apache License.
+
