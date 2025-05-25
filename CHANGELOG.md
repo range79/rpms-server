@@ -120,3 +120,11 @@ Once the issue is fixed, the login functionality and admin panel HTML will be co
 
 
 
+## 📜 License Change Notice
+
+Starting from **version 2.0.0**, the project license has been changed from **Apache License** to **GNU General Public License v3.0 (GPL-3.0)**.
+
+* This change aims to promote **strong copyleft** principles, ensuring that all derivative works remain open source under the same license.
+* Users and contributors must comply with the terms of GPL-3.0 from this version onwards.
+* Previous versions remain under the Apache License.
+
