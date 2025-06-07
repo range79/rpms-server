@@ -59,15 +59,28 @@ Below is an example `application.yml` configuration:
 
 ```yaml
 spring:
+  datasource:
+    url: #(your-database-url) like jdbc:postgresql://localhost:5432/users
+    username: #your-database-user-usernamename in compose.yaml
+    password: #your-database-password in compose.yaml
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
   data:
     mongodb:
       host: localhost
       port: 27017
-      database: your-db-name
+      database: something
+
   thymeleaf:
     enabled: true
     prefix: classpath:/templates/
     suffix: .html
+
   servlet:
     multipart:
       max-file-size: 1000MB
@@ -78,8 +91,9 @@ springdoc:
     enabled: true
 
 app:
-  jwt-secret: your-secret-key
+  jwt-secret: #you need it base64 format
   jwt-duration: 22
+
 ````
 
 ---
@@ -94,10 +108,19 @@ services:
     image: 'mongo:latest'
     environment:
       - MONGO_INITDB_DATABASE=something
-      - MONGO_INITDB_ROOT_USERNAME=yourusername
-      - MONGO_INITDB_ROOT_PASSWORD=yourpass
+
     ports:
       - '27017:27017'
+
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_DB=users
+      - POSTGRES_USER=  #postgress user name  you need fil  it
+      - POSTGRES_PASSWORD= #postgress password
+    ports:
+      - '5432:5432'
+
 ```
 
 To start MongoDB locally, run:

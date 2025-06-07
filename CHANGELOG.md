@@ -128,3 +128,10 @@ Starting from **version 2.0.0**, the project license has been changed from **Apa
 * Users and contributors must comply with the terms of GPL-3.0 from this version onwards.
 * Previous versions remain under the Apache License.
 
+## Version 2.0.1
+
+* ✅ **Fixed Swagger access issue:** Updated `CommonSecurityConfig` to allow proper access to Swagger UI.
+
+# version 2.0.2 
+
+* readme updated
