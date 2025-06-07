@@ -131,3 +131,7 @@ Starting from **version 2.0.0**, the project license has been changed from **Apa
 ## Version 2.0.1
 
 * ✅ **Fixed Swagger access issue:** Updated `CommonSecurityConfig` to allow proper access to Swagger UI.
+
+# version 2.0.2 
+
+* readme updated
