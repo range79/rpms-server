@@ -12,4 +12,10 @@ public class UserContextUtil implements UserContext {
                 .getAuthentication()
                 .getName();
     }
+
+//    @Override
+//    public long getCurrentUserId() {
+//        return SecurityContextHolder.getContext().getAuthentication()
+//    }
+
 }

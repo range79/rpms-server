@@ -135,3 +135,9 @@ Starting from **version 2.0.0**, the project license has been changed from **Apa
 # version 2.0.2 
 
 * readme updated
+
+# Version 2.1.0  dev 
+
+* User setting repo implemented(still don't have controller)
+* Auth api java added
+* added swagger doc to friend request action api 
