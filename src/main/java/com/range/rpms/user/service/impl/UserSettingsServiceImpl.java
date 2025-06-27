@@ -42,17 +42,23 @@ public class UserSettingsServiceImpl implements UserSettingsService {
 
     @Override
     public void getDarkMode() {
-
+        UserSettings userSettings =new UserSettings();
+        userSettings.setDarkMode(true);
+        userSettingsRepository.save(userSettings);
     }
 
     @Override
     public void getEmailNotificationsEnabled() {
-
+        UserSettings userSettings =new UserSettings();
+        userSettings.setReceiveEmail(true);
+        userSettingsRepository.save(userSettings);
     }
 
     @Override
-    public void getDefaultPackageVisibility() {
-
+    public void getDefaultPackageVisibility(PackageVisibility packageVisibility) {
+    UserSettings userSettings =new UserSettings();
+    userSettings.setDefaultPackageVisibility(packageVisibility);
+    userSettingsRepository.save(userSettings);
     }
 
 }

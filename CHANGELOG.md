@@ -141,3 +141,11 @@ Starting from **version 2.0.0**, the project license has been changed from **Apa
 * User setting repo implemented(still don't have controller)
 * Auth api java added
 * added swagger doc to friend request action api 
+
+### 📄 Version 2.2.0 Beta
+
+* The **UserContext** utility has been upgraded and can now retrieve user data.
+* **AuthController** has been updated. JWT tokens are now stored directly in HTTP headers. I’m considering adding a refresh token mechanism in a future release (possibly version 4).
+* The `packages/Securits` package has been renamed to `package/security`.
+* The method `UserRegisterResponse userToUserRegisterResponse(User user)` has been removed.
+* API versioning support has been added.

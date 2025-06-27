@@ -93,6 +93,7 @@ springdoc:
 app:
   jwt-secret: #you need it base64 format
   jwt-duration: 22
+  https: true
 
 ````
 

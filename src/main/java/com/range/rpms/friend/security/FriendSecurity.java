@@ -23,7 +23,7 @@ public class FriendSecurity {
     @Order(3)
     public SecurityFilterChain friendChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/friends/**")
+                .securityMatcher("/v1/friends/**")
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin(AbstractHttpConfigurer::disable)
