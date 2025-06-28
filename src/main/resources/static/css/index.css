@@ -815,3 +815,17 @@
 .authLink:hover {
   text-decoration: none;
 }
+
+.dashboardPage {
+  height: 90vh;
+  width: 100%;
+  background: url(../images/background.jpg) rgba(0,0,0,0.7);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
