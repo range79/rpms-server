@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body class="authBG">
+  <a href="index.html" class="brandLabel">Range&nbsp;Package&nbsp;Manager</a>
+  <div class="authPage">
+
+    <form id="registerForm" method="POST" action="/v1/auth/register" class="authForm">
+      <h2 class="header">Register</h2>
+      <input class="authInput" type="text" name="username" placeholder="Username" required>
+      <input class="authInput" type="email" name="email" placeholder="Email" required>
+      <input class="authInput" type="password" name="password" placeholder="Password" required>
+      <input class="authInput" type="password" name="confirmPassword" placeholder="Confirm Password" required>
+      <button type="submit" class="authButton">Create&nbsp;Account</button>
+      <a href="login.html" class="authLink">Already have an account? Sign in</a>
+    </form>
+  </div>
+  <script src="./js/auth.js"></script>
+</body>
+
+</html>
