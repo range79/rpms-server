@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/packages/my-packages")
+@RequestMapping("/v1/packages/my-packages")
 @Tag(name = "MyPackagesController", description = "Operations related to authenticated user's own packages")
 public interface MyPackagesApi {
 

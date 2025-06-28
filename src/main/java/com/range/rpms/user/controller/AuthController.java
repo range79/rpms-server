@@ -1,141 +1,95 @@
 package com.range.rpms.user.controller;
 
 import com.range.rpms.common.dto.GenericResponse;
+import com.range.rpms.user.api.AuthApi;
 import com.range.rpms.user.dto.UserLoginRequest;
 import com.range.rpms.user.dto.UserRegisterRequest;
-import com.range.rpms.user.dto.UserRegisterResponse;
 import com.range.rpms.user.service.AuthService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
-public class AuthController {
 
-    private final AuthService authService;
+public class AuthController implements AuthApi {
 
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
-    @Operation(summary = "register",
-            description = "register a user to database"
-    )
-    @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "User register is successful",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = GenericResponse.class),
-                            examples = @ExampleObject(value = """
-                                {
-                                  "success": true,
-                                  "message": "User register is successful",
-                                  "statusCode": 200,
-                                  "data": {
-                                        "id": "your-id",
-                                        "username": "your-username",
-                                        "role": "user"
-                                    }
-                                    }
-                    
-                    """
-                            )
-                    )
-            ),
-            @ApiResponse(
-                    responseCode = "409",
-                    description = "user already exits",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = GenericResponse.class),
-                            examples = @ExampleObject(value = """
-                {
-                  "success": false,
-                  "message": "user already exits",
-                  "statusCode": 409,
-                  "data": null
-                  }
-                """
-                            )
-                    )
-            )
-    })
-    @PostMapping("/register")
-    public ResponseEntity<GenericResponse<UserRegisterResponse>> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest) {
 
-        return
-                ResponseEntity.ok(new GenericResponse<>(
-                                true,
-                                "User register is successful",
-                                HttpStatus.OK.value(),
-                                authService.register(userRegisterRequest)
-                        )
-                );
+    private final AuthService authService;
 
+    @Override
+    public ResponseEntity<GenericResponse<String>> register(UserRegisterRequest userRegisterRequest) {
+        return ResponseEntity.ok()
+                .body(new GenericResponse<>(
+                        true,
+                        "User registration successful",
+                        HttpStatus.OK.value(),
+                        authService.register(userRegisterRequest)
+
+                ));
     }
 
-    @Operation(summary = "Login", description = "Authenticates user and returns JWT token")
-    @ApiResponses(
-            value = {
+    @Override
+    public ResponseEntity<GenericResponse<String>> login(UserLoginRequest userLoginRequest) {
+        return ResponseEntity.ok()
 
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Login successful",
-                            content = @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = GenericResponse.class),
-                                    examples = @ExampleObject(value = """
-                                {
-                                  "success": true,
-                                  "message": "User login is successful",
-                                  "statusCode": 200,
-                                  "data": "jwt.token.here"
-                                }
-                                """)
-                            )
-                    ),
-                    @ApiResponse(
-                            responseCode = "401",
-                            description = "Wrong password",
-                            content = @Content(
-                                    mediaType = "application/json",
-                                    schema = @Schema(implementation = GenericResponse.class),
-                                    examples = @ExampleObject(value = """
-                                {
-                                  "success": false,
-                                  "message": "wrong password",
-                                  "statusCode": 401,
-                                  "data": null
-                                }
-                                """)
-                            )
-                    )
-            }
-    )
+                .body(new GenericResponse<>(
+                        true,
+                        "User registration successful",
+                        HttpStatus.OK.value(),
+                        authService.login(userLoginRequest)
+                ));
+    }
+/*
+    l will add in new version
+    @Value("${app.jwt-duration}")
+    private int jwtDuration;
+    @Value("${app.https}")
+    private boolean httpEnable;
 
-    @PostMapping("/login")
-    public ResponseEntity<GenericResponse<String>> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
 
-        return ResponseEntity.ok(new GenericResponse<>(
+
+    public ResponseEntity<GenericResponse<Void>> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest) {
+        String token = authService.register(userRegisterRequest);
+        ResponseCookie cookie = ResponseCookie.from("auth", token)
+                .httpOnly(true)
+                .secure(httpEnable)
+                .path("/")
+                .maxAge(jwtDuration)
+                .sameSite("Strict")
+                .build();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body(new GenericResponse<>(
+                        true,
+                        "User registration successful",
+                        HttpStatus.OK.value(),
+                        null
+                ));
+
+
+    }
+    public ResponseEntity<GenericResponse<Void>> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
+        String token = authService.login(userLoginRequest);
+        ResponseCookie cookie = ResponseCookie.from("auth", token)
+                .httpOnly(true)
+                .secure(httpEnable)
+                .path("/")
+                .maxAge(jwtDuration)
+                .sameSite("Strict")
+                .build();
+
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,cookie.toString()).body(new GenericResponse<>(
                         true,
                         "User login is successful",
                         HttpStatus.OK.value(),
-                        authService.login(userLoginRequest)
+                        null
                 )
         );
 
     }
-
+*/
 }

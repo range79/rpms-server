@@ -34,8 +34,7 @@ public class CommonSecurityConfig {
                         "/images/**")
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .formLogin(form -> form
-                        .disable()
+                .formLogin(AbstractHttpConfigurer::disable
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
