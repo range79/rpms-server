@@ -8,6 +8,9 @@ import com.range.rpms.user.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.validation.Valid;
+
 
 @RestController
 
@@ -20,28 +23,27 @@ public class AuthController implements AuthApi {
     private final AuthService authService;
 
     @Override
-    public ResponseEntity<GenericResponse<String>> register(UserRegisterRequest userRegisterRequest) {
+    public ResponseEntity<GenericResponse<String>> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest) {
         return ResponseEntity.ok()
-                .body(new GenericResponse<>(
-                        true,
-                        "User registration successful",
-                        HttpStatus.OK.value(),
-                        authService.register(userRegisterRequest)
-
-                ));
+            .body(new GenericResponse<>(
+                true,
+                "User registration successful",
+                HttpStatus.OK.value(),
+                authService.register(userRegisterRequest)
+            ));
     }
 
     @Override
-    public ResponseEntity<GenericResponse<String>> login(UserLoginRequest userLoginRequest) {
+    public ResponseEntity<GenericResponse<String>> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
         return ResponseEntity.ok()
-
-                .body(new GenericResponse<>(
-                        true,
-                        "User registration successful",
-                        HttpStatus.OK.value(),
-                        authService.login(userLoginRequest)
-                ));
+            .body(new GenericResponse<>(
+                true,
+                "Login successful",
+                HttpStatus.OK.value(),
+                authService.login(userLoginRequest)
+            ));
     }
+
 /*
     l will add in new version
     @Value("${app.jwt-duration}")
