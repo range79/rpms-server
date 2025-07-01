@@ -45,7 +45,7 @@ if (regF) {
     const data = Object.fromEntries(new FormData(regF));
 
     if (data.password !== data.confirmPassword) {
-      regErr.textContent = "Password does not match";
+      regErr.textContent = "Password does not match.";
       regErr.style.display = "block";
       return;
     }
