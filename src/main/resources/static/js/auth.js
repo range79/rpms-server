@@ -57,7 +57,7 @@ if (regF) {
     } catch (err) {
       regErr.textContent =
         err.status === 409
-          ? "Username or email already exists"
+          ? "Username or email already exists."
           : "Registration failed – please try again.";
       regErr.style.display = "block";
     }
