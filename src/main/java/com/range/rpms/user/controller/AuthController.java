@@ -9,11 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import jakarta.validation.Valid;
 
 
 @RestController
-
+@RequestMapping("/v1/auth")
 public class AuthController implements AuthApi {
 
     public AuthController(AuthService authService) {

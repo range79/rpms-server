@@ -10,8 +10,9 @@
   <a href="index.html" class="brandLabel">Range&nbsp;Package&nbsp;Manager</a>
   
   <div class="authPage">
-    <form id="loginForm" method="POST" action="/api/v1/auth/login" class="authForm">
+    <form id="loginForm" method="POST" action="/v1/auth/login" class="authForm">
       <h2 class="header">Login</h2>
+      <div id="loginError" class="errorBox" style="display: none;"></div>
       <input class="authInput" type="text" name="username" placeholder="Username" required>
       <input class="authInput" type="password" name="password" placeholder="Password" required>
       <button type="submit" class="authButton">Log&nbsp;In</button>
