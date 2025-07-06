@@ -3,8 +3,8 @@ package com.range.rpms.packages.service.impl;
 import com.range.rpms.common.util.FileExtensionUtil;
 import com.range.rpms.common.util.UserContext;
 import com.range.rpms.common.util.UserContextUtil;
-import com.range.rpms.packages.dao.model.PackageEntity;
-import com.range.rpms.packages.dao.repository.PackageRepository;
+import com.range.rpms.packages.domain.model.PackageEntity;
+import com.range.rpms.packages.domain.repository.PackageRepository;
 import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.dto.UploadPackageRequest;
 import com.range.rpms.packages.enums.PackageVisibility;
@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 @Service
 public class MyPackageServiceImpl implements MyPackageService {
@@ -34,26 +35,25 @@ public class MyPackageServiceImpl implements MyPackageService {
         this.packageMapper = packageMapper;
     }
 
-
+@Transactional
     @Override
     public void deleteMyAllPackages() {
-        String currentUserName = currentUser.getCurrentUserName();
-        packageRepository.deleteByAuthor(currentUserName);
-    }
 
+        packageRepository.deleteByAuthor(currentUserId());
+    }
+@Transactional
     @Override
     public void deletePackageById(String id) throws PackageNotFoundException {
-        String currentUserName = currentUser.getCurrentUserName();
+        Long currentUserId = currentUser.getCurrentUserId();
 
-        packageRepository.deleteByAuthor(currentUserName);
+        packageRepository.deleteByAuthor(currentUserId);
     }
 
 
 
     @Override
     public List<PackageMetaData> getAllPackages() {
-        String currentUserName = currentUser.getCurrentUserName();
-        List<PackageEntity> entities = packageRepository.findByAuthor(currentUserName);
+        List<PackageEntity> entities = packageRepository.findByAuthor(currentUserId());
 
         return  entities.stream()
                 .map(packageMapper::toPackageMetaData)
@@ -72,11 +72,11 @@ public class MyPackageServiceImpl implements MyPackageService {
         PackageEntity packageEntity = packageRepository.findById(id)
                 .orElseThrow(()->new PackageNotFoundException("Package "+id+" not found"));
 
-        //get User id which perform this method
-        String holderId = currentUser.getCurrentUserName();
 
 
-        if (!holderId.equals(packageEntity.getAuthor())){
+
+
+        if (!currentUserId().equals(packageEntity.getAuthor())){
             throw new UserNotOwnerOfPackageException("User not owner of package "+id);
         }
 
@@ -101,16 +101,19 @@ public class MyPackageServiceImpl implements MyPackageService {
 
     @Override
     public void setPackageVisibility(String packageId, int visibilityCode) throws PackageNotFoundException {
-        String currentUserName = currentUser.getCurrentUserName();
+
 
         PackageEntity entity = packageRepository.findById(packageId)
                 .orElseThrow(()->new PackageNotFoundException("Package "+packageId+" not found"));
-        if (!entity.getAuthor().equals(currentUserName)){
+        if (!(Objects.equals(entity.getAuthor(), currentUserId()))){
             throw new UserNotOwnerOfPackageException("User not owner of package "+packageId);
         }
         PackageVisibility visibility = PackageVisibilityMapper.getPackageVisibility(visibilityCode);
 
         entity.setPackageVisibility(visibility);
         packageRepository.save(entity);
+    }
+    private Long currentUserId(){
+        return  currentUser.getCurrentUserId();
     }
 }

@@ -1,6 +1,6 @@
 package com.range.rpms.packages.mapper;
 
-import com.range.rpms.packages.dao.model.PackageEntity;
+import com.range.rpms.packages.domain.model.PackageEntity;
 import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.dto.UploadPackageRequest;
 import org.mapstruct.Mapper;

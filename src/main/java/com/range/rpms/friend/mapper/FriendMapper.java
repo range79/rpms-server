@@ -1,6 +1,6 @@
 package com.range.rpms.friend.mapper;
 
-import com.range.rpms.friend.dao.model.FriendRequest;
+import com.range.rpms.friend.domain.model.FriendRequest;
 import com.range.rpms.friend.dto.FriendRequestDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -15,7 +15,7 @@ public class PackageMetaData {
     private String id;
     private String name;
     private String description;
-    private String author;
+    private Long author;
     private Double version;
     private PackageVisibility packageVisibility;
 }

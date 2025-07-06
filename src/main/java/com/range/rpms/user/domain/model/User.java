@@ -1,4 +1,4 @@
-package com.range.rpms.user.dao.model;
+package com.range.rpms.user.domain.model;
 
 import com.range.rpms.user.enums.Role;
 import jakarta.persistence.*;

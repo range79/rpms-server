@@ -1,4 +1,4 @@
-package com.range.rpms.packages.dao.model;
+package com.range.rpms.packages.domain.model;
 
 import com.range.rpms.packages.enums.PackageVisibility;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ public class PackageEntity {
     private String id;
     private String name;
     private String description;
-    private String author;
+    private Long author;
     private double version;
     private byte[] content;
     private PackageVisibility packageVisibility;

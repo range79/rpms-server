@@ -1,11 +1,8 @@
 package com.range.rpms.friend.service.helper;
 
 import com.range.rpms.common.util.UserContext;
-import com.range.rpms.common.util.UserContextUtil;
-import com.range.rpms.user.dao.model.User;
-import com.range.rpms.user.dao.repository.UserRepository;
+import com.range.rpms.user.domain.model.User;
 
-import com.range.rpms.user.exception.UserNotFoundException;
 import com.range.rpms.user.service.UserService;
 import org.springframework.stereotype.Component;
 

@@ -154,3 +154,23 @@ Starting from **version 2.0.0**, the project license has been changed from **Apa
 ## Version 2.3.0 – Stable
 
 *  Return token directly to user instead of setting cookie (requested by frontend developer)
+
+
+## Version 2.4.0-Beta
+
+### Refactor
+- Dependency handling in `PackageMetadataServiceImpl` has been improved:  
+  The class now uses `FriendService` instead of the previous dependency, resulting in a cleaner and more testable implementation.
+- The `getUsername()` method in `UserContext` has been removed:  
+  User authentication and retrieval now rely exclusively on user IDs rather than usernames.
+- `FriendRequestService` was refactored to fetch users by their unique IDs instead of usernames:  
+  This change improves consistency, reduces potential for incorrect matches, and aligns with ID-based domain logic.
+- The `author` field in the `PackageEntity` model has been changed from `String` to `Long`:  
+  This allows direct association with user IDs and simplifies data integrity.
+- Package naming was adjusted to improve clarity and maintain domain-driven design conventions:  
+  The `dao` package has been renamed to `domain` for better readability and clearer responsibility separation.
+
+### Notes
+- This release removes username-based queries in favor of ID-based lookups.
+- Because some fields were migrated to `Long` types, ensure your data migrations and integrations handle this change properly.
+- Dependency simplification makes unit testing easier and allows broader use of mocking in service implementations.

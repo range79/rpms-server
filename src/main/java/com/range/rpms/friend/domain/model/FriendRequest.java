@@ -1,8 +1,8 @@
-package com.range.rpms.friend.dao.model;
+package com.range.rpms.friend.domain.model;
 
 
 import com.range.rpms.friend.enums.FriendRequestStatus;
-import com.range.rpms.user.dao.model.User;
+import com.range.rpms.user.domain.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
