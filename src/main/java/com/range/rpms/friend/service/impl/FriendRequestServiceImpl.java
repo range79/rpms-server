@@ -81,9 +81,9 @@ public class FriendRequestServiceImpl implements FriendRequestService {
 
     @Override
     public FriendRequest findFriend(Long id) {
-return friendRequestRepository
-        .findById(id)
-        .orElseThrow(()->new RuntimeException("Friend request not found"));
+        return friendRequestRepository
+                .findById(id)
+                .orElseThrow(()->new RuntimeException("Friend request not found"));
     }
 
 

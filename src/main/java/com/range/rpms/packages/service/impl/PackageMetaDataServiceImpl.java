@@ -2,7 +2,7 @@ package com.range.rpms.packages.service.impl;
 
 import com.range.rpms.common.util.UserContext;
 import com.range.rpms.friend.domain.model.Friend;
-import com.range.rpms.friend.domain.repository.FriendRepository;
+import com.range.rpms.friend.service.FriendService;
 import com.range.rpms.packages.domain.repository.PackageRepository;
 import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.enums.PackageVisibility;
@@ -22,19 +22,19 @@ public class PackageMetaDataServiceImpl implements PackageMetaDataService {
 
     private final PackageMapper packageMapper;
     private final UserContext userContext;
-    private final FriendRepository friendRepository;
-private final UserService userService;
+    private final FriendService friendService;
+    private final UserService userService;
 
     public PackageMetaDataServiceImpl(PackageRepository packagerepository,
                                       PackageMapper packageMapper,
                                       UserContext userContext,
-                                      FriendRepository friendRepository,
+                                      FriendService friendService,
                                       UserService userService) {
         this.userContext = userContext;
         this.packagerepository = packagerepository;
         this.packageMapper = packageMapper;
-        this.friendRepository = friendRepository;
         this.userService = userService;
+        this.friendService = friendService;
     }
     /**
      * This service is for server administrators.
@@ -47,7 +47,7 @@ private final UserService userService;
 
         User user = userService.findUser(userContext.getCurrentUserId());
 
-        List<Friend> userFriends = friendRepository.findFriendBySenderOrReceiver(user, user);
+        List<Friend> userFriends = friendService.getFriends(user);
 
         List<PackageMetaData> publicPackages = packagerepository
                 .findAllByPackageVisibility(PackageVisibility.PUBLIC)
@@ -61,8 +61,8 @@ private final UserService userService;
                 .stream()
                 .filter(pkg -> userFriends.stream()
                         .anyMatch(friend ->
-                                pkg.getAuthor().equals(friend.getSender().getUsername()) ||
-                                        pkg.getAuthor().equals(friend.getReceiver().getUsername())
+                                pkg.getAuthor().equals(friend.getSender().getId()) ||
+                                        pkg.getAuthor().equals(friend.getReceiver().getId())
                         ))
                 .map(packageMapper::toPackageMetaData)
                 .toList();
@@ -93,7 +93,7 @@ private final UserService userService;
                 .map(packageMapper::toPackageMetaData)
 
                 .collect(Collectors.toList());
-        //if metadataList is empty throw an exception
+
         if (metaDataList.isEmpty()){
 
             throw new PackageNotFoundException("No package found with name: " +packageName);

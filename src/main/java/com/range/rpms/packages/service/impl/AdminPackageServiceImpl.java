@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class AdminPackageServiceImpl implements AdminPackageService {
-    private PackageRepository packagerepository;
+    private final PackageRepository packagerepository;
     private final PackageMapper packageMapper;
     public AdminPackageServiceImpl(PackageRepository packagerepository,
                                    PackageMapper packageMapper) {
