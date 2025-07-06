@@ -1,7 +1,6 @@
-package com.range.rpms.packages.dao.repository;
+package com.range.rpms.packages.domain.repository;
 
-import com.mongodb.RequestContext;
-import com.range.rpms.packages.dao.model.PackageEntity;
+import com.range.rpms.packages.domain.model.PackageEntity;
 import com.range.rpms.packages.enums.PackageVisibility;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -13,11 +12,11 @@ public interface PackageRepository extends MongoRepository<PackageEntity, String
 
 
     Optional<PackageEntity> findByName(String packageName);
-    void deleteByAuthor(String name);
+    void deleteByAuthor(Long id);
     void deleteByName(String name);
     List<PackageEntity> findByNameLike(String name);
 
-    List <PackageEntity> findByAuthor(String author);
+    List <PackageEntity> findByAuthor(Long id);
 
    List<PackageEntity> findAllByPackageVisibility(PackageVisibility packageVisibility);
 }

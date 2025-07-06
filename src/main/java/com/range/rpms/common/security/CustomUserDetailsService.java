@@ -1,8 +1,7 @@
 package com.range.rpms.common.security;
 
-import com.range.rpms.user.dao.model.User;
-import com.range.rpms.user.dao.repository.UserRepository;
-import org.springframework.core.annotation.Order;
+import com.range.rpms.user.domain.model.User;
+import com.range.rpms.user.domain.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

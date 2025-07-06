@@ -1,4 +1,4 @@
-package com.range.rpms.user.dao.model;
+package com.range.rpms.user.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

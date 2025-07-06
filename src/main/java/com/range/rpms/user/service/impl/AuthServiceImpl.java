@@ -1,8 +1,8 @@
 package com.range.rpms.user.service.impl;
 
 import com.range.rpms.user.enums.Role;
-import com.range.rpms.user.dao.model.User;
-import com.range.rpms.user.dao.repository.UserRepository;
+import com.range.rpms.user.domain.model.User;
+import com.range.rpms.user.domain.repository.UserRepository;
 import com.range.rpms.user.dto.UserLoginRequest;
 import com.range.rpms.user.dto.UserRegisterRequest;
 import com.range.rpms.user.exception.AuthenticationFailedException;

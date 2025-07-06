@@ -1,14 +1,15 @@
 package com.range.rpms.friend.service.impl;
 
-import com.range.rpms.friend.dao.model.FriendRequest;
-import com.range.rpms.friend.dao.repository.FriendRequestRepository;
+import com.range.rpms.friend.domain.model.Friend;
+import com.range.rpms.friend.domain.model.FriendRequest;
+import com.range.rpms.friend.domain.repository.FriendRequestRepository;
 import com.range.rpms.friend.dto.FriendRequestDto;
 import com.range.rpms.friend.enums.FriendRequestStatus;
 import com.range.rpms.friend.exception.FriendRequestAlreadyExistsException;
 import com.range.rpms.friend.mapper.FriendMapper;
 import com.range.rpms.friend.service.FriendRequestService;
 import com.range.rpms.friend.service.helper.FriendRequestServiceHelper;
-import com.range.rpms.user.dao.model.User;
+import com.range.rpms.user.domain.model.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -71,5 +72,19 @@ public class FriendRequestServiceImpl implements FriendRequestService {
                 .map(friendMapper::friendRequestToFriendRequestDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteFriendRequest(Long id) {
+        FriendRequest friendRequest = friendRequestRepository.findById(id).orElseThrow(()->new RuntimeException("Friend request not found"));
+        friendRequestRepository.delete(friendRequest);
+    }
+
+    @Override
+    public FriendRequest findFriend(Long id) {
+return friendRequestRepository
+        .findById(id)
+        .orElseThrow(()->new RuntimeException("Friend request not found"));
+    }
+
 
 }

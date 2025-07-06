@@ -1,7 +1,6 @@
 package com.range.rpms.user.service;
 
-import com.range.rpms.user.dao.model.User;
-import jakarta.persistence.Id;
+import com.range.rpms.user.domain.model.User;
 
 public interface UserService {
     User findUser(Long id);

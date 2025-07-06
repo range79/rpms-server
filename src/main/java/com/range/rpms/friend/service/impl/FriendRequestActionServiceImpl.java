@@ -1,15 +1,14 @@
 package com.range.rpms.friend.service.impl;
 
 import com.range.rpms.common.util.UserContext;
-import com.range.rpms.friend.dao.model.Friend;
-import com.range.rpms.friend.dao.model.FriendRequest;
-import com.range.rpms.friend.dao.repository.FriendRepository;
-import com.range.rpms.friend.dao.repository.FriendRequestRepository;
-import com.range.rpms.friend.exception.FriendRequestUserNotFoundException;
+import com.range.rpms.friend.domain.model.Friend;
+import com.range.rpms.friend.domain.model.FriendRequest;
+import com.range.rpms.friend.domain.repository.FriendRepository;
+import com.range.rpms.friend.exception.FriendNotFoundException;
 import com.range.rpms.friend.service.FriendRequestActionService;
-import com.range.rpms.user.dao.model.User;
-import com.range.rpms.user.dao.repository.UserRepository;
-import com.range.rpms.user.exception.UserNotFoundException;
+import com.range.rpms.friend.service.FriendRequestService;
+import com.range.rpms.user.domain.model.User;
+import com.range.rpms.user.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -17,76 +16,73 @@ import org.springframework.stereotype.Service;
 @Service
 public class FriendRequestActionServiceImpl implements FriendRequestActionService {
 
-// todo this service needs big refactor
 
-    private final FriendRequestRepository friendRequestRepository;
+    private final FriendRequestService friendRequestService;
     private final UserContext userContext;
     private final  FriendRepository friendRepository;
-    private final UserRepository userRepository;
+    private final UserService  userService;
+
+
     public FriendRequestActionServiceImpl(
-            FriendRequestRepository friendRequestRepository,
+            FriendRequestService friendRequestService,
             UserContext userContext,
             FriendRepository friendRepository,
-            UserRepository userRepository
-
+            UserService userService
     ) {
-        this.friendRequestRepository= friendRequestRepository;
+        this.friendRequestService = friendRequestService;
         this.userContext = userContext;
         this.friendRepository = friendRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
+
     }
 
 
     @Override
     @Transactional
     public void acceptFriendRequest(Long id) {
-        FriendRequest friendRequest = friendRequestRepository
-                .findById(id)
-                .orElseThrow(() -> new FriendRequestUserNotFoundException("Friend request not found"));
-
-
-        String currentUsername = userContext.getCurrentUserName();
-
-
+        FriendRequest friendRequest =friendRequestService.findFriend(id);
         User sender = friendRequest.getSender();
         User receiver = friendRequest.getReceiver();
 
-        if (!receiver.getUsername().equals(currentUsername)) {
+        if (receiver.getId()!=getUserId()) {
             throw new AccessDeniedException("You cannot accept a request not sent to you.");
         }
 
 
         Friend friend = new Friend(sender, receiver);
 
-
         friendRepository.save(friend);
-
-
-        friendRequestRepository.delete(friendRequest);
+        friendRequestService.deleteFriendRequest(id);
     }
     @Transactional
     @Override
     public void rejectFriendRequest(Long id) {
-
-        friendRequestRepository.delete(friendRequestRepository.findById(id).orElseThrow(()->new FriendRequestUserNotFoundException("Friend request not found")));
+        friendRequestService.deleteFriendRequest(id);
     }
 
 
     @Override
     @Transactional
     public void removeFriend(Long id) {
-        String currentUsername = userContext.getCurrentUserName();
-        User user1 = userRepository.findByUsername(currentUsername).orElseThrow(()->new UserNotFoundException("User not found"));
-        User user2 = userRepository.findById(id).orElseThrow(()->new UserNotFoundException("User not found"));
-     friendRepository
-             .deleteFriendBySenderAndReceiverOrSenderAndReceiver
-                     (user1,user2,
-             user2,user1);
+
+        User user1 = userService.findUser(getUserId());
+        User user2 = userService.findUser(id);
+        friendRepository
+                .deleteFriendBySenderAndReceiverOrSenderAndReceiver
+                        (user1,user2,
+                                user2,user1);
     }
 
+    @Override
+    public Friend findFriend(Long id) {
 
+        return  friendRepository
+                .findById(id)
+                .orElseThrow(()->new FriendNotFoundException("Friend not found:"+id));
+    }
 
-
-
+    private long getUserId(){
+        return userContext.getCurrentUserId();
+    }
 }
 

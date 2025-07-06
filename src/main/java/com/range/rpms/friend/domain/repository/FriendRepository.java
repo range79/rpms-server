@@ -1,7 +1,7 @@
-package com.range.rpms.friend.dao.repository;
+package com.range.rpms.friend.domain.repository;
 
-import com.range.rpms.friend.dao.model.Friend;
-import com.range.rpms.user.dao.model.User;
+import com.range.rpms.friend.domain.model.Friend;
+import com.range.rpms.user.domain.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

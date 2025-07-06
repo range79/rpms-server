@@ -1,17 +1,16 @@
 package com.range.rpms.packages.service.impl;
 
-import com.range.rpms.friend.dao.model.Friend;
-import com.range.rpms.friend.dao.repository.FriendRepository;
-import com.range.rpms.packages.dao.repository.PackageRepository;
+import com.range.rpms.common.util.UserContext;
+import com.range.rpms.friend.domain.model.Friend;
+import com.range.rpms.friend.domain.repository.FriendRepository;
+import com.range.rpms.packages.domain.repository.PackageRepository;
 import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.enums.PackageVisibility;
 import com.range.rpms.packages.exception.PackageNotFoundException;
 import com.range.rpms.packages.mapper.PackageMapper;
 import com.range.rpms.packages.service.PackageMetaDataService;
-import com.range.rpms.common.util.UserContextUtil;
-import com.range.rpms.user.dao.model.User;
-import com.range.rpms.user.dao.repository.UserRepository;
-import com.range.rpms.user.exception.UserNotFoundException;
+import com.range.rpms.user.domain.model.User;
+import com.range.rpms.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,20 +21,20 @@ public class PackageMetaDataServiceImpl implements PackageMetaDataService {
     private final PackageRepository packagerepository;
 
     private final PackageMapper packageMapper;
-    private final UserContextUtil springSecurityUserContextUtil;
+    private final UserContext userContext;
     private final FriendRepository friendRepository;
-    private final UserRepository userRepository;
+private final UserService userService;
 
     public PackageMetaDataServiceImpl(PackageRepository packagerepository,
                                       PackageMapper packageMapper,
-                                      UserContextUtil springSecurityUserContextUtil,
+                                      UserContext userContext,
                                       FriendRepository friendRepository,
-                                      UserRepository userRepository) {
-        this.springSecurityUserContextUtil = springSecurityUserContextUtil;
+                                      UserService userService) {
+        this.userContext = userContext;
         this.packagerepository = packagerepository;
         this.packageMapper = packageMapper;
         this.friendRepository = friendRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
     /**
      * This service is for server administrators.
@@ -44,39 +43,38 @@ public class PackageMetaDataServiceImpl implements PackageMetaDataService {
      */
     @Override
     public List<PackageMetaData> getAllPackages() {
-      {
-            String username = springSecurityUserContextUtil.getCurrentUserName();
-            User user = userRepository.findByUsername(username)
-                    .orElseThrow(() -> new UserNotFoundException("User Not Found"));
-
-            List<Friend> userFriends = friendRepository.findFriendBySenderOrReceiver(user, user);
-
-            List<PackageMetaData> publicPackages = packagerepository
-                    .findAllByPackageVisibility(PackageVisibility.PUBLIC)
-                    .stream()
-                    .map(packageMapper::toPackageMetaData)
-                    .collect(Collectors.toList());
 
 
-            List<PackageMetaData> friendPackages = packagerepository
-                    .findAllByPackageVisibility(PackageVisibility.ONLY_FRIEND)
-                    .stream()
-                    .filter(pkg -> userFriends.stream()
-                            .anyMatch(friend ->
-                                    pkg.getAuthor().equals(friend.getSender().getUsername()) ||
-                                            pkg.getAuthor().equals(friend.getReceiver().getUsername())
-                            ))
-                    .map(packageMapper::toPackageMetaData)
-                    .toList();
+        User user = userService.findUser(userContext.getCurrentUserId());
+
+        List<Friend> userFriends = friendRepository.findFriendBySenderOrReceiver(user, user);
+
+        List<PackageMetaData> publicPackages = packagerepository
+                .findAllByPackageVisibility(PackageVisibility.PUBLIC)
+                .stream()
+                .map(packageMapper::toPackageMetaData)
+                .collect(Collectors.toList());
 
 
-            publicPackages.addAll(friendPackages);
-            return publicPackages;
-        }
+        List<PackageMetaData> friendPackages = packagerepository
+                .findAllByPackageVisibility(PackageVisibility.ONLY_FRIEND)
+                .stream()
+                .filter(pkg -> userFriends.stream()
+                        .anyMatch(friend ->
+                                pkg.getAuthor().equals(friend.getSender().getUsername()) ||
+                                        pkg.getAuthor().equals(friend.getReceiver().getUsername())
+                        ))
+                .map(packageMapper::toPackageMetaData)
+                .toList();
 
 
-
+        publicPackages.addAll(friendPackages);
+        return publicPackages;
     }
+
+
+
+
     /**
      * Searches for a package in the database by name.
      * This service is accessed via the search/{packageName} endpoint.
