@@ -1,4 +1,4 @@
-# 🌟 Range Package Manager - Open Source Backend
+#  Range Package Manager - Open Source Backend
 
 **Range Package Manager** is an open-source backend project built for managing software packages. Designed with a scalable and modular architecture, this backend serves as the server-side component of the Range Package Manager ecosystem. It leverages technologies like **MongoDB**, **MapStruct**, **Thymeleaf**, and **Gradle** to provide a reliable, flexible, and developer-friendly environment.
 
@@ -93,7 +93,8 @@ springdoc:
 app:
   jwt-secret: #you need it base64 format
   jwt-duration: 22
-  https: true
+# https: true – I will add it when I switch to sending token in headers together with the frontend developer
+
 
 ````
 

@@ -1,8 +1,8 @@
 package com.range.rpms.user.service.impl;
 
 import com.range.rpms.user.enums.Role;
-import com.range.rpms.user.dao.model.User;
-import com.range.rpms.user.dao.repository.UserRepository;
+import com.range.rpms.user.domain.model.User;
+import com.range.rpms.user.domain.repository.UserRepository;
 import com.range.rpms.user.dto.UserLoginRequest;
 import com.range.rpms.user.dto.UserRegisterRequest;
 import com.range.rpms.user.exception.AuthenticationFailedException;
@@ -61,13 +61,13 @@ public class AuthServiceImpl implements AuthService {
 
         if (userRepository.existsByUsername(userRegisterRequest.getUsername())) {
 
-            throw new UserAlreadyExistsException("This username already taken");
+            throw new UserAlreadyExistsException("This username is already taken");
 
         }
 
         if (userRepository.existsByEmail(userRegisterRequest.getEmail())) {
 
-            throw new UserAlreadyExistsException("This email already taken");
+            throw new UserAlreadyExistsException("This email is already taken");
 
         }
 

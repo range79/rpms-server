@@ -1,6 +1,6 @@
 package com.range.rpms.packages.service.impl;
 
-import com.range.rpms.packages.dao.repository.PackageRepository;
+import com.range.rpms.packages.domain.repository.PackageRepository;
 import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.exception.PackageDeletionException;
 import com.range.rpms.packages.exception.PackageNotFoundException;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class AdminPackageServiceImpl implements AdminPackageService {
-    private PackageRepository packagerepository;
+    private final PackageRepository packagerepository;
     private final PackageMapper packageMapper;
     public AdminPackageServiceImpl(PackageRepository packagerepository,
                                    PackageMapper packageMapper) {

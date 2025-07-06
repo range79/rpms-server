@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="./css/index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="authBG">
+  <a href="index.html" class="brandLabel">Range Package Manager</a>
+
+  <div class="dashboardPage">
+    <h2 class="header">Welcome</h2>
+    <p class="text">You are logged in.<br>This page is under construction.</p>
+    <button class="authButton" onclick="logout()">Log out</button>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("rpms_token");
+      location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

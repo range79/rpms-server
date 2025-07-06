@@ -1,8 +1,8 @@
 package com.range.rpms.user.service.impl;
 
 import com.range.rpms.packages.enums.PackageVisibility;
-import com.range.rpms.user.dao.model.UserSettings;
-import com.range.rpms.user.dao.repository.UserSettingsRepository;
+import com.range.rpms.user.domain.model.UserSettings;
+import com.range.rpms.user.domain.repository.UserSettingsRepository;
 import com.range.rpms.user.service.UserSettingsService;
 import org.springframework.stereotype.Service;
 

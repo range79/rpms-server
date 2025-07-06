@@ -1,6 +1,6 @@
 package com.range.rpms.common.security;
 
-import com.range.rpms.user.dao.model.User;
+import com.range.rpms.user.domain.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,7 +12,9 @@ public class CustomUserDetails implements UserDetails {
     public CustomUserDetails(User user) {
         this.user = user;
     }
-
+    public Long getId() {
+        return user.getId();
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(user.getRole());
