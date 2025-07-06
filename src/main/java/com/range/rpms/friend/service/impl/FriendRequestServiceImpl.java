@@ -64,9 +64,9 @@ public class FriendRequestServiceImpl implements FriendRequestService {
 
     @Override
     public List<FriendRequestDto> pendingFriendRequests() {
-        String currentUsername = helper.getCurrentUsername();
+        long senderId = helper.getCurrentUser().getId();
         return  friendRequestRepository
-                .findBySender_Username(currentUsername)
+                .findBySender_Id(senderId)
                 .stream()
                 .map(friendMapper::friendRequestToFriendRequestDto)
                 .collect(Collectors.toList());

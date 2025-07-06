@@ -1,4 +1,4 @@
-package com.range.rpms.packages.Security;
+package com.range.rpms.packages.security;
 
 import com.range.rpms.common.security.filter.JwtFilter;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ public class PackagesSecurityConfig {
     @Order(4)
     @Bean
     public SecurityFilterChain packagesSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.securityMatcher("/packages/**").csrf(csrf->csrf.disable())
+        http.securityMatcher("/v1/packages/**").csrf(csrf->csrf.disable())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class).authorizeHttpRequests(auth->
                         auth.requestMatchers("/packages/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/packages/user/**").hasAnyRole("USER", "ADMIN"));

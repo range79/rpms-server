@@ -53,16 +53,6 @@ public class CommonSecurityConfig {
         return http.build();
     }
 
-    @Bean
-    @Order(5)
-    public SecurityFilterChain fallback(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().denyAll()
-                );
-        return http.build();
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

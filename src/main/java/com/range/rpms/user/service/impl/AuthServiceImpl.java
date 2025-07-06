@@ -5,7 +5,6 @@ import com.range.rpms.user.dao.model.User;
 import com.range.rpms.user.dao.repository.UserRepository;
 import com.range.rpms.user.dto.UserLoginRequest;
 import com.range.rpms.user.dto.UserRegisterRequest;
-import com.range.rpms.user.dto.UserRegisterResponse;
 import com.range.rpms.user.exception.AuthenticationFailedException;
 import com.range.rpms.user.exception.UserAlreadyExistsException;
 import com.range.rpms.user.exception.UserNotFoundException;
@@ -46,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
 
         if (!passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
 
-            throw new AuthenticationFailedException("Wrong password");
+            throw new AuthenticationFailedException("Authentication failed: incorrect password.");
 
         }
 
@@ -57,18 +56,18 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserRegisterResponse register(UserRegisterRequest userRegisterRequest) {
+    public String register(UserRegisterRequest userRegisterRequest) {
 
 
         if (userRepository.existsByUsername(userRegisterRequest.getUsername())) {
 
-            throw new UserAlreadyExistsException("This username already taken");
+            throw new UserAlreadyExistsException("This username is already taken");
 
         }
-        //if users email exits throw an exception
+
         if (userRepository.existsByEmail(userRegisterRequest.getEmail())) {
 
-            throw new UserAlreadyExistsException("This email already taken");
+            throw new UserAlreadyExistsException("This email is already taken");
 
         }
 
@@ -82,7 +81,7 @@ public class AuthServiceImpl implements AuthService {
 
         logger.info("New user '{}' registered with email '{}'", user.getUsername(), user.getEmail());
 
-        return userMapper.userToUserRegisterResponse(user);
+        return jwtUtil.generateToken(user.getUsername(), user.getRole());
 
 
     }

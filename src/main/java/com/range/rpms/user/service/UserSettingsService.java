@@ -9,7 +9,7 @@ public interface UserSettingsService {
     void setDefaultPackageVisibility(PackageVisibility packageVisibility);
     void getDarkMode();
     void getEmailNotificationsEnabled();
-    void getDefaultPackageVisibility();
+    void getDefaultPackageVisibility(PackageVisibility packageVisibility);
 
 }
 

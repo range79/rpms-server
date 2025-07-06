@@ -716,3 +716,124 @@
 }
 @media (min-width: 1281px) {
 }
+
+/* Auth page layout */
+.authPage {
+  height: 90vh;
+  width: 100%;
+  background: url(../images/background.jpg) rgba(0,0,0,0.7);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authForm {
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authInput {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 0.5rem;
+  border: none;
+  font-family: 'Comfortaa', cursive;
+}
+
+.authInput:focus {
+  outline: none;
+  box-shadow: 0 0 0.25rem 0.25rem #ff6ec4;
+}
+
+.authBG {
+  background: url(./images/background.jpg) rgba(0,0,0,.7);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
+   background-color: #000;
+  min-height: 100vh;
+}
+
+/* Auth page button style */
+.authButton {
+  width: 40%;
+  min-width: 180px;
+  height: 3.2rem;
+  border-radius: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #fff;
+  background: linear-gradient(45deg, #d06bf7, #ff6ec4, #cf7bf0, #d06bf7);
+  box-shadow: 0 0 2rem .4rem #ff6ec4;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  margin-top: 1.5rem;
+}
+
+.authButton:hover {
+  transform: scale(1.1);
+}
+
+/* Auth page brand label (top right) */
+.brandLabel {
+  position: fixed;
+  top: 1.2rem;
+  right: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-decoration: none;
+}
+
+/* Auth page link styling (Sign in + Create account) */
+.authLink {
+  margin-top: 1rem;
+  font-family: 'Comfortaa', cursive;
+  font-size: 0.9rem;
+  color: #c695ff;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.authLink:hover {
+  text-decoration: none;
+}
+
+.dashboardPage {
+  height: 90vh;
+  width: 100%;
+  background: url(../images/background.jpg) rgba(0,0,0,0.7);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.errorBox {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-family: 'Comfortaa', cursive;
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+}

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Tag(name = "Package MetaData API", description = "Provides metadata queries for packages")
-@RequestMapping("/packages/user/info")
+@RequestMapping("/v1/packages/user/info")
 public interface PackageMetaDataApi {
 
     @Operation(
