@@ -19,13 +19,13 @@ public class PackageServiceImpl implements PackageService {
     private final PackageRepository packagerepository;
     private final PackageMapper packageMapper;
 
-    private final UserContextUtil springSecurityUserContextUtil;
+
     public PackageServiceImpl(PackageRepository packagerepository
             , PackageMapper packageMapper
             , UserContextUtil springSecurityUserContextUtil) {
         this.packagerepository = packagerepository;
         this.packageMapper = packageMapper;
-        this.springSecurityUserContextUtil = springSecurityUserContextUtil;
+
     }
     /**
      This service is responsible for updating package details, such as version or package author.

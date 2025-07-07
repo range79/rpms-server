@@ -1,6 +1,5 @@
 package com.range.rpms.friend.service.impl;
 
-import com.range.rpms.friend.domain.model.Friend;
 import com.range.rpms.friend.domain.model.FriendRequest;
 import com.range.rpms.friend.domain.repository.FriendRequestRepository;
 import com.range.rpms.friend.dto.FriendRequestDto;
@@ -41,8 +40,8 @@ public class FriendRequestServiceImpl implements FriendRequestService {
         }
         FriendRequest request =  FriendRequest.builder().sender(sender)
                 .receiver(receiver)
-                .senderName(sender.getUsername())
-                .receiverName(receiver.getUsername())
+                .senderName(sender.getId())
+                .receiverName(receiver.getId())
                 .status(FriendRequestStatus.PENDING)
                 .createTime(LocalDateTime.now())
                 .build();

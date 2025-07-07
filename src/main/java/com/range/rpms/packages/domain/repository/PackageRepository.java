@@ -18,5 +18,5 @@ public interface PackageRepository extends MongoRepository<PackageEntity, String
 
     List <PackageEntity> findByAuthor(Long id);
 
-   List<PackageEntity> findAllByPackageVisibility(PackageVisibility packageVisibility);
+    List<PackageEntity> findAllByPackageVisibility(PackageVisibility packageVisibility);
 }
