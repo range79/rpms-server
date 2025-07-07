@@ -6,5 +6,5 @@ public interface FriendRequestActionService {
     void acceptFriendRequest(Long id);
     void rejectFriendRequest(Long id);
     void removeFriend(Long id);
-    Friend findFriend(Long id);
+
 }
