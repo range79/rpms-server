@@ -23,13 +23,13 @@ public class FriendRequest {
     @JoinColumn(name = "sender_id")
     private User sender;
 
-    private String senderName;
+    private Long senderName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver_id")
     private User receiver;
 
-    private String receiverName;
+    private Long receiverName;
 
     @Enumerated(EnumType.STRING)
     private FriendRequestStatus status;

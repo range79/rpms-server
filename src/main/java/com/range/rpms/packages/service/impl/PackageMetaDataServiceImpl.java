@@ -98,7 +98,8 @@ public class PackageMetaDataServiceImpl implements PackageMetaDataService {
 
             throw new PackageNotFoundException("No package found with name: " +packageName);
 
-        }return metaDataList;
+        }
+        return metaDataList;
     }
 
 

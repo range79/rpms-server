@@ -4,7 +4,6 @@ import com.range.rpms.common.util.UserContext;
 import com.range.rpms.friend.domain.model.Friend;
 import com.range.rpms.friend.domain.model.FriendRequest;
 import com.range.rpms.friend.domain.repository.FriendRepository;
-import com.range.rpms.friend.exception.FriendNotFoundException;
 import com.range.rpms.friend.service.FriendRequestActionService;
 import com.range.rpms.friend.service.FriendRequestService;
 import com.range.rpms.user.domain.model.User;
@@ -73,13 +72,7 @@ public class FriendRequestActionServiceImpl implements FriendRequestActionServic
                                 user2,user1);
     }
 
-    @Override
-    public Friend findFriend(Long id) {
 
-        return  friendRepository
-                .findById(id)
-                .orElseThrow(()->new FriendNotFoundException("Friend not found:"+id));
-    }
 
     private long getUserId(){
         return userContext.getCurrentUserId();
