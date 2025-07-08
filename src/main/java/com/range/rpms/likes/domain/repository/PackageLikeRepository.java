@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PackageLikeRepository extends JpaRepository<PackageLike, Long> {
-    List<PackageLike> findByUserIdAndPackageId(Long userId, Long packageId);
 
-    Boolean exitsByUserIdAndPackageId(Long userId,Long packageId);
 
-    List<PackageLike> findByUserId(Long userId);
+    Boolean existsByUserIdAndPackageId(Long userId,Long packageId);
+
+
 
     List<PackageLike> findByPackageId(Long packageId);
 }

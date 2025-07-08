@@ -174,3 +174,29 @@ Starting from **version 2.0.0**, the project license has been changed from **Apa
 - This release removes username-based queries in favor of ID-based lookups.
 - Because some fields were migrated to `Long` types, ensure your data migrations and integrations handle this change properly.
 - Dependency simplification makes unit testing easier and allows broader use of mocking in service implementations.
+
+### Version 2.5.0 -stable
+### ✨ Features
+
+* Added and implemented **PackageLike API**.
+* Created and implemented **PackageLikeService**.
+* Added **Like** model.
+* Added **PackageLike** entity.
+
+### 🐛 Bug Fixes
+
+* Fixed a bug in the Package repository; the application now works correctly.
+
+### 🛠 Refactoring
+
+* Removed `findByUserIdAndPackageId` method from the repository.
+* Removed `findFriend` method from `FriendRequestActionService`.
+
+### ⚠️ Exceptions
+
+* Added `PackageAlreadyLikedException`, `LikeNotFoundException`, and `PackageLikeAuthorException`.
+
+### 📚 Documentation
+
+* Updated contributors documentation.
+

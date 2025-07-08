@@ -25,7 +25,7 @@ public class PackageLikeServiceImpl implements PackageLikeService {
     @Override
     public void likePackage(Long id) {
         Long userId=getUserId();
-        if (packageLikeRepository.exitsByUserIdAndPackageId(userId,id)){
+        if (packageLikeRepository.existsByUserIdAndPackageId(userId,id)){
             throw new PackageAlreadyLikedException("Package already liked");
         }
         PackageLike packageLike=  PackageLike.builder().userId(userId).packageId(id).build();
