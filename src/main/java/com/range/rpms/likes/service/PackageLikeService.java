@@ -7,8 +7,8 @@ import java.util.List;
 public interface PackageLikeService {
 
     void likePackage(Long id);
-    void dislikePackage(Long id);
-    List<PackageLike> getPackageLikes(Long id);
+    void removeLikePackage(Long id);
+    Integer getPackageLikes(Long id);
 
 
 }
