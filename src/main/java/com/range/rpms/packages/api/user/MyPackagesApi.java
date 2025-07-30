@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/v1/packages/my-packages")
+@RequestMapping("/${app.base-path}/packages/my-packages")
 @Tag(name = "MyPackagesController", description = "Operations related to authenticated user's own packages")
 public interface MyPackagesApi {
 

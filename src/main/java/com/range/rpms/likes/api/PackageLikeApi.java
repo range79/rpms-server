@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/v1/likes/package")
+@RequestMapping("/${app.base-path}/likes/package")
 public interface PackageLikeApi {
-    @PostMapping("${packageId}")
+    @PostMapping("{packageId}")
     ResponseEntity<Void> likePackage(Long id);
-    @DeleteMapping("${packageId}")
+    @DeleteMapping("{packageId}")
     ResponseEntity<Void> removeLikePackage(Long id);
-    @PostMapping("${packageId}/count")
+    @PostMapping("{packageId}/count")
     ResponseEntity<Integer> getPackageLikes(Long id);
 
 

@@ -11,4 +11,5 @@ public class AbstractExceptionHandler extends RuntimeException {
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
+
 }

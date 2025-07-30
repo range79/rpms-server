@@ -200,3 +200,16 @@ Starting from **version 2.0.0**, the project license has been changed from **Apa
 
 * Updated contributors documentation.
 
+## [2.6.0-beta] - Unreleased (dev branch)
+
+### Added
+- Introduced `app.base-path` configuration with default `/v2/app`
+- Updated API endpoints to use dynamic base-path prefix
+- Added global exception handler for generic exceptions
+- Added validation annotations (`@Email`, `@Size`) to UserRegisterRequest DTO
+- Added `@Transactional` annotations to AuthServiceImpl methods
+
+### Changed
+- Replaced hardcoded `v1` prefix in API URLs with `${app.base-path}`
+- Centralized base-path configuration in ApiProperties class
+

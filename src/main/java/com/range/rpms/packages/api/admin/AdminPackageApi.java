@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Tag(name = "Admin Package API", description = "Admin operations for managing packages")
-@RequestMapping("/v1/packages/admin")
+@RequestMapping("/${app.base-path}/packages/admin")
 public interface AdminPackageApi {
 
     @Operation(
