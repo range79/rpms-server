@@ -6,12 +6,12 @@ import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.dto.UploadPackageRequest;
 import com.range.rpms.packages.mapper.PackageVisibilityMapper;
 import com.range.rpms.packages.service.MyPackageService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 public class MyPackagesController implements MyPackagesApi {
@@ -22,12 +22,12 @@ public class MyPackagesController implements MyPackagesApi {
         this.myPackageService = myPackageService;
 
     }
-
-    public ResponseEntity<GenericResponse<List<PackageMetaData>>> getAllPackages() {
+    @Override
+    public ResponseEntity<GenericResponse<Page<PackageMetaData>>> getAllPackages(int page, int size) {
         return ResponseEntity.ok(new GenericResponse<>(true,
                         "List of packages you've published",
                         HttpStatus.OK.value(),
-                        myPackageService.getAllPackages()
+                        myPackageService.getAllPackages(page, size)
                 )
         );
     }

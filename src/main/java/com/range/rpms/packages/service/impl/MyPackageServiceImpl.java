@@ -15,6 +15,9 @@ import com.range.rpms.packages.exception.UserNotOwnerOfPackageException;
 import com.range.rpms.packages.mapper.PackageMapper;
 import com.range.rpms.packages.mapper.PackageVisibilityMapper;
 import com.range.rpms.packages.service.MyPackageService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,12 +55,11 @@ public class MyPackageServiceImpl implements MyPackageService {
 
 
     @Override
-    public List<PackageMetaData> getAllPackages() {
-        List<PackageEntity> entities = packageRepository.findByAuthor(currentUserId());
+    public Page<PackageMetaData> getAllPackages(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+       Page<PackageEntity> entities = packageRepository.findByAuthor(currentUserId(),pageable);
 
-        return  entities.stream()
-                .map(packageMapper::toPackageMetaData)
-                .collect(Collectors.toList());
+        return  entities.map(packageMapper::toPackageMetaData);
 
 
     }

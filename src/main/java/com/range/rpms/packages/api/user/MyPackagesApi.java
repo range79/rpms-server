@@ -5,6 +5,7 @@ import com.range.rpms.packages.dto.PackageMetaData;
 import com.range.rpms.packages.dto.UploadPackageRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,11 @@ import java.io.IOException;
 @RequestMapping("/${app.base-path}/packages/my-packages")
 @Tag(name = "MyPackagesController", description = "Operations related to authenticated user's own packages")
 public interface MyPackagesApi {
-
+    @Operation(
+            summary = "Get users all packages"
+    )
+    ResponseEntity<GenericResponse<Page<PackageMetaData>>> getAllPackages(@RequestParam(defaultValue = "0") int page,
+                                                                          @RequestParam(defaultValue = "10")int size);
 
     @Operation(
             summary = "Delete all your packages",
