@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.io.IOException;
 
-@RequestMapping("/v1/packages/user")
+@RequestMapping("/${app.base-path}/packages/user")
 public interface PackageApi {
 
     @Operation(summary = "Download package by ID")

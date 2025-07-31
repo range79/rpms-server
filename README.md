@@ -93,6 +93,7 @@ springdoc:
 app:
   jwt-secret: #you need it base64 format
   jwt-duration: 22
+  base-path: /v2/app
 # https: true – I will add it when I switch to sending token in headers together with the frontend developer
 
 

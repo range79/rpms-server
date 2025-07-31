@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/v1/friends/")
+@RequestMapping("/${app.base-path}/friends/")
 public interface FriendRequestApi {
     @Operation(
             summary = "send friend request",

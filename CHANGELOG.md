@@ -200,3 +200,57 @@ Starting from **version 2.0.0**, the project license has been changed from **Apa
 
 * Updated contributors documentation.
 
+## [2.6.0-beta] - Unreleased (dev branch)
+
+### Added
+- Introduced `app.base-path` configuration with default `/v2/app`
+- Updated API endpoints to use dynamic base-path prefix
+- Added global exception handler for generic exceptions
+- Added validation annotations (`@Email`, `@Size`) to UserRegisterRequest DTO
+- Added `@Transactional` annotations to AuthServiceImpl methods
+
+### Changed
+- Replaced hardcoded `v1` prefix in API URLs with `${app.base-path}`
+- Centralized base-path configuration in ApiProperties class
+
+
+## 📌 Changelog — Version 2.7.0
+
+### 🔹 New Features
+
+* **Error Management API**
+
+  * Added `ErrorsApi` with endpoints to fetch:
+
+    * All errors (`/errors/all`)
+    * Server-side errors (`/errors/server`)
+    * Client-side errors (`/errors/client`)
+  * Implemented `ErrorsController` to provide REST access to error logs with pagination support.
+
+* **Enhanced Exception Handling**
+
+  * Introduced detailed stack trace capturing in `ErrorResponseUtil` (`Arrays.toString(e.getStackTrace())`).
+  * Unified `ErrorResponse` DTO with Lombok annotations (`@Data`, `@Builder`, `@NoArgsConstructor`, `@AllArgsConstructor`).
+
+### 🔹 Improvements
+
+* Moved `ErrorResponseUtil` from `common.util` to `common.exception` package for better structure and consistency.
+* Updated `ErrorRepository` method `findAllByErrorTypes` → `findAllByErrorType` (fixing naming alignment).
+* Implemented filtering of error logs by type (`SERVER_ERROR`, `CLIENT_ERROR`) in `ErrorServiceImpl`.
+* Simplified `GlobalExceptionHandler` imports and structure.
+
+### 🔹 Breaking Changes
+
+* Removed hardcoded `@RequestMapping("/v1/auth")` from `AuthController`.
+
+  * Endpoint mappings now rely on `AuthApi` configuration.
+* Error DTO package moved from `error.domain.dto` to `error.dto`.
+
+### 🔹 Bug Fixes
+
+* Fixed serialization issues for custom `ErrorResponse` by enforcing `application/json` response type.
+* Ensured pagination metadata is returned properly when fetching error logs.
+
+---
+
+⚡ This release focuses on **robust error tracking, cleaner code organization, and improved API usability**.

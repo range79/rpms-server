@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/v1/auth")
+@RequestMapping("/${app.base-path}/auth")
 public interface AuthApi  {
 //    @Operation(
 //            summary = "resgister",

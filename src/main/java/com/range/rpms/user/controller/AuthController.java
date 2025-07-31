@@ -15,7 +15,6 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("/v1/auth")
 public class AuthController implements AuthApi {
 
     public AuthController(AuthService authService) {
@@ -52,9 +51,6 @@ public class AuthController implements AuthApi {
     private int jwtDuration;
     @Value("${app.https}")
     private boolean httpEnable;
-
-
-
     public ResponseEntity<GenericResponse<Void>> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest) {
         String token = authService.register(userRegisterRequest);
         ResponseCookie cookie = ResponseCookie.from("auth", token)

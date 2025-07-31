@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -33,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
         this.jwtUtil = jwtUtil;
         this.userMapper = userMapper;
     }
-
+    @Transactional(readOnly = true)
     @Override
     public String login(UserLoginRequest userLoginRequest) {
 
@@ -54,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
         return jwtUtil.generateToken(user.getUsername(), user.getRole());
 
     }
-
+    @Transactional
     @Override
     public String register(UserRegisterRequest userRegisterRequest) {
 
