@@ -1,13 +1,12 @@
 package com.range.rpms.error.service.impl;
 
-import com.range.rpms.error.domain.dto.ErrorResponse;
+import com.range.rpms.error.dto.ErrorResponse;
 import com.range.rpms.error.domain.model.ErrorTypes;
 import com.range.rpms.error.domain.model.Errors;
 import com.range.rpms.error.domain.repository.ErrorRepository;
 import com.range.rpms.error.service.ErrorService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,11 +31,11 @@ public class ErrorServiceImpl implements ErrorService {
 
     @Override
     public Page<Errors> findServerErrors(int size, int page) {
-        return null;
+        return errorRepository.findAllByErrorType(ErrorTypes.SERVER_ERROR, PageRequest.of(page, size));
     }
 
     @Override
     public Page<Errors> findClientErrors(int size, int page) {
-        return null;
+        return errorRepository.findAllByErrorType(ErrorTypes.CLIENT_ERROR, PageRequest.of(page, size));
     }
 }

@@ -12,6 +12,6 @@ import java.util.UUID;
 public interface ErrorRepository extends JpaRepository<Errors, UUID> {
 
     Page<Errors> findAll(Pageable pageable);
-Page<Errors> findAllByErrorTypes(ErrorTypes errorType, Pageable pageable);
+Page<Errors> findAllByErrorType(ErrorTypes errorType, Pageable pageable);
 
 }

@@ -1,16 +1,17 @@
-package com.range.rpms.common.util;
-import com.range.rpms.common.dto.GenericResponse;
-import com.range.rpms.error.domain.dto.ErrorResponse;
+package com.range.rpms.common.exception;
+import com.range.rpms.error.dto.ErrorResponse;
 import com.range.rpms.error.domain.model.ErrorTypes;
 import com.range.rpms.error.domain.model.Errors;
 import com.range.rpms.error.service.ErrorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @Component
 public class ErrorResponseUtil {
@@ -32,13 +33,13 @@ public class ErrorResponseUtil {
         }
         Errors errors = Errors
                 .builder()
-                .detail(e.getCause().toString())
+                .detail(Arrays.toString(e.getStackTrace()))
                 .message(e.getMessage())
                 .timestamp(LocalDateTime.now())
                 .errorType(errorTypes)
                 .build();
         ErrorResponse errorResponse=  errorService.saveError(errors);
-        return ResponseEntity.status(status)
+        return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON)
                 .body(errorResponse);
     }
 }
