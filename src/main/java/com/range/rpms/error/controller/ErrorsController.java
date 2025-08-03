@@ -20,12 +20,12 @@ public class ErrorsController implements ErrorsApi {
     }
 
     @Override
-    public ResponseEntity<Page<Errors>> findServerErrors(int size, int page) {
-        return ResponseEntity.ok(errorService.findServerErrors(size, page));
+    public Page<Errors> findServerErrors(int size, int page) {
+        return errorService.findServerErrors(size, page);
     }
 
     @Override
-    public ResponseEntity<Page<Errors>> findClientErrors(int size, int page) {
-        return ResponseEntity.ok(errorService.findClientErrors(size, page));
+    public Page<Errors>  findClientErrors(int size, int page) {
+        return errorService.findClientErrors(size, page);
     }
 }
