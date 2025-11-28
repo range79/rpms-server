@@ -12,20 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/${app.base-path}/auth")
 public interface AuthApi  {
-//    @Operation(
-//            summary = "resgister",
-//            description = "register to the app "
-//    )
-//    @PostMapping("/register")
-//    ResponseEntity<GenericResponse<Void>> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest);
-//    @Operation(
-//            summary = "login",
-//            description = "login to the app "
-//    )
-//    @PostMapping("/login")
-//    ResponseEntity<GenericResponse<Void>> login(@RequestBody @Valid UserLoginRequest userLoginRequest);
-
-
 
     @Operation(
             summary = "resgister",

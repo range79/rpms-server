@@ -1,9 +1,11 @@
 package com.range.rpms.error.controller;
 
 import com.range.rpms.error.api.ErrorsApi;
+import com.range.rpms.error.domain.model.ErrorTypes;
 import com.range.rpms.error.domain.model.Errors;
 import com.range.rpms.error.service.ErrorService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,18 +16,14 @@ public class ErrorsController implements ErrorsApi {
         this.errorService = errorService;
     }
 
+
     @Override
-    public ResponseEntity<Page<Errors>> findAll(int size, int page) {
-        return ResponseEntity.ok(errorService.findAll(size, page));
+    public Page<Errors> findAll(Pageable pageable) {
+        return errorService.findAll(pageable);
     }
 
     @Override
-    public Page<Errors> findServerErrors(int size, int page) {
-        return errorService.findServerErrors(size, page);
-    }
-
-    @Override
-    public Page<Errors>  findClientErrors(int size, int page) {
-        return errorService.findClientErrors(size, page);
+    public Page<Errors> findErrorByType(Pageable pageable, ErrorTypes errorTypes) {
+        return errorService.findErrorsByTypes(pageable, errorTypes);
     }
 }

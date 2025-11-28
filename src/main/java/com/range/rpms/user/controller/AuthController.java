@@ -45,51 +45,5 @@ public class AuthController implements AuthApi {
             ));
     }
 
-/*
-    l will add in new version
-    @Value("${app.jwt-duration}")
-    private int jwtDuration;
-    @Value("${app.https}")
-    private boolean httpEnable;
-    public ResponseEntity<GenericResponse<Void>> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest) {
-        String token = authService.register(userRegisterRequest);
-        ResponseCookie cookie = ResponseCookie.from("auth", token)
-                .httpOnly(true)
-                .secure(httpEnable)
-                .path("/")
-                .maxAge(jwtDuration)
-                .sameSite("Strict")
-                .build();
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(new GenericResponse<>(
-                        true,
-                        "User registration successful",
-                        HttpStatus.OK.value(),
-                        null
-                ));
-
-
-    }
-    public ResponseEntity<GenericResponse<Void>> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
-        String token = authService.login(userLoginRequest);
-        ResponseCookie cookie = ResponseCookie.from("auth", token)
-                .httpOnly(true)
-                .secure(httpEnable)
-                .path("/")
-                .maxAge(jwtDuration)
-                .sameSite("Strict")
-                .build();
-
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,cookie.toString()).body(new GenericResponse<>(
-                        true,
-                        "User login is successful",
-                        HttpStatus.OK.value(),
-                        null
-                )
-        );
-
-    }
-*/
 }
