@@ -1,103 +1,11 @@
-#  Range Package Manager - Open Source Backend
+#  Range Package manager Server
 
-**Range Package Manager** is an open-source backend project built for managing software packages. Designed with a scalable and modular architecture, this backend serves as the server-side component of the Range Package Manager ecosystem. It leverages technologies like **MongoDB**, **MapStruct**, **Thymeleaf**, and **Gradle** to provide a reliable, flexible, and developer-friendly environment.
+## A git repository backend  
+- supports login
+- adding likes to repositorys
+- sending frend requests 
+- follow users 
 
----
-
-## 🔧 About the Project
-
-The backend system of **Range Package Manager** enables users to upload, search, retrieve, and delete packages via a RESTful API and an admin panel interface. The project is under active development and aims to become a robust and modern package management platform.
-
-Feedback and contributions are always welcome to help improve the project and accelerate its progress.
-
----
-
-## 💻 Technologies Used
-
-- **MongoDB** – Flexible and scalable NoSQL database
-- **Spring Boot** – Framework for building robust web and REST APIs
-- **Thymeleaf** – Server-side rendering engine for dynamic HTML templates
-- **MapStruct** – Java bean mapping framework for DTO <-> entity conversion
-- **Gradle** – Build tool for dependency and project management
-- **Spring Security & JWT** – Secure authentication and authorization system
-- **Swagger (OpenAPI)** – Interactive and auto-generated API documentation
-
----
-
-## 📈 Project Status
-
-The project is currently in **active development**. Existing features include:
-
-- Package upload and metadata storage
-- REST API and admin panel integration
-- Swagger-based API documentation
-- Basic authentication via JWT
-- Error handling and exception mapping
-
-For a detailed list of updates, see [CHANGELOG.md](CHANGELOG.md).
-
----
-
-## 🤝 Contributing
-
-Community contributions are highly appreciated!  
-To contribute:
-
-1. Fork the repository 🍴  
-2. Create a new branch (`feature/your-feature` or `bugfix/your-fix`)  
-3. Commit your changes with clear messages  
-4. Submit a Pull Request 📤  
-
-Make sure your code is readable, tested (where applicable), and well-documented.
-
----
-
-
-## ⚙️ Configuration Example
-
-Below is an example `application.yml` configuration:
-
-```yaml
-spring:
-  datasource:
-    url: #(your-database-url) like jdbc:postgresql://localhost:5432/users
-    username: #your-database-user-usernamename in compose.yaml
-    password: #your-database-password in compose.yaml
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: something
-
-  thymeleaf:
-    enabled: true
-    prefix: classpath:/templates/
-    suffix: .html
-
-  servlet:
-    multipart:
-      max-file-size: 1000MB
-      max-request-size: 1000MB
-
-springdoc:
-  api-docs:
-    enabled: true
-
-app:
-  jwt-secret: #you need it base64 format
-  jwt-duration: 22
-  base-path: /v2/app
-# https: true – I will add it when I switch to sending token in headers together with the frontend developer
-
-
-````
 
 ---
 
@@ -125,9 +33,7 @@ services:
       - '5432:5432'
 
 ```
-
-To start MongoDB locally, run:
-
+# if you don't know how to start docker-compose here example
 ```bash
 docker-compose up -d
 ```
