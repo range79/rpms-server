@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,7 +15,7 @@ public interface ErrorsApi {
 
     @GetMapping("/all")
     Page<Errors> findAll(Pageable pageable);
-    @GetMapping("/server")
-    Page<Errors> findErrorByType(Pageable pageable, ErrorTypes errorTypes);
+    @GetMapping("/{errorTypes}")
+    Page<Errors> findErrorByType(Pageable pageable, @PathVariable ErrorTypes errorTypes);
 
 }

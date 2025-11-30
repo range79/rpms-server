@@ -14,15 +14,6 @@
 A basic `docker-compose.yml` file is included for setting up MongoDB:
 
 ```yaml
-services:
-  mongodb:
-    image: 'mongo:latest'
-    environment:
-      - MONGO_INITDB_DATABASE=something
-
-    ports:
-      - '27017:27017'
-
   postgres:
     image: 'postgres:latest'
     environment:
