@@ -7,11 +7,12 @@ import com.range.rpms.error.domain.repository.ErrorRepository;
 import com.range.rpms.error.service.ErrorService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ErrorServiceImpl implements ErrorService {
-    private ErrorRepository errorRepository;
+    private final ErrorRepository errorRepository;
     public ErrorServiceImpl(ErrorRepository errorRepository) {
         this.errorRepository = errorRepository;
     }
@@ -25,17 +26,14 @@ public class ErrorServiceImpl implements ErrorService {
     }
 
     @Override
-    public Page<Errors> findAll(int size, int page) {
-     return errorRepository.findAll(PageRequest.of(page, size));
+    public Page<Errors> findAll(Pageable pageable) {
+        return errorRepository.findAll(pageable);
     }
 
     @Override
-    public Page<Errors> findServerErrors(int size, int page) {
-        return errorRepository.findAllByErrorType(ErrorTypes.SERVER_ERROR, PageRequest.of(page, size));
+    public Page<Errors> findErrorsByTypes(Pageable pageable, ErrorTypes errorTypes) {
+        return errorRepository.findAllByErrorType(errorTypes, pageable);
     }
 
-    @Override
-    public Page<Errors> findClientErrors(int size, int page) {
-        return errorRepository.findAllByErrorType(ErrorTypes.CLIENT_ERROR, PageRequest.of(page, size));
-    }
+
 }
