@@ -28,7 +28,7 @@ public class CommonSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.securityMatcher("/v3/swagger-config",
                         "/swagger",
-                        "v3/api-docs",
+                        "/v3/api-docs",
                         "/css/**",
                         "/js/**",
                         "/images/**")
@@ -43,7 +43,7 @@ public class CommonSecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/swagger",
-                                "v3/api-docs",
+                                "/v3/api-docs",
                                 "/css/**",
                                 "/js/**",
                                 "/images/**"
