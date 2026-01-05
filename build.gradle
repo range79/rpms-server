@@ -42,7 +42,7 @@ dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
     // swagger openapi dependencies
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1'
     //security stuff
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
