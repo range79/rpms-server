@@ -1,6 +1,6 @@
 package com.range.rpms.common.util;
 
-import com.range.rpms.user.enums.Role;
+import com.range.rpms.users.enums.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

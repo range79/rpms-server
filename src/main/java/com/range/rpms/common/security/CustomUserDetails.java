@@ -1,6 +1,6 @@
 package com.range.rpms.common.security;
 
-import com.range.rpms.user.domain.model.User;
+import com.range.rpms.users.domain.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

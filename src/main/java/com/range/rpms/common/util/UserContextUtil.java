@@ -1,7 +1,7 @@
 package com.range.rpms.common.util;
 
 import com.range.rpms.common.security.CustomUserDetails;
-import com.range.rpms.user.exception.UserNotFoundException;
+import com.range.rpms.users.exception.UserNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
