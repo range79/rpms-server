@@ -1,4 +1,4 @@
-package com.example.rpms.common.dto
+package com.range.rpms.common.dto
 
 import org.springframework.http.HttpStatus
 

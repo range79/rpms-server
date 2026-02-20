@@ -1,4 +1,4 @@
-package com.example.rpms.common.exception
+package com.range.rpms.common.exception
 
 import org.springframework.http.HttpStatus
 

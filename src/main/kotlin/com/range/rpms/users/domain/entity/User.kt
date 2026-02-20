@@ -1,4 +1,4 @@
-package com.example.rpms.users.domain.entity
+package com.range.rpms.users.domain.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -12,10 +12,11 @@ import java.util.UUID
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    var id: UUID,
+    var id: UUID?=null,
     @Column(nullable = false,unique = true)
     val username: String,
     var password: String,
     @Column(nullable = false,unique = true)
     var email: String,
+    val role: Role
 )

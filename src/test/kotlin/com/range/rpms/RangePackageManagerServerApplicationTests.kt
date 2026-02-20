@@ -1,4 +1,4 @@
-package com.example.rpms
+package com.range.rpms
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
