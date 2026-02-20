@@ -16,8 +16,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
-*.env
-/src/main/resources/.env
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -36,5 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
-compose.yml
-src/main/resources/application.yaml
+
+### Kotlin ###
+.kotlin
