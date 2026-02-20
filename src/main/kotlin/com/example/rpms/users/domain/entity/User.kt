@@ -18,4 +18,5 @@ data class User(
     var password: String,
     @Column(nullable = false,unique = true)
     var email: String,
+    val role:Role
 )
