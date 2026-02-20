@@ -11,11 +11,11 @@ class UserServiceImpl (
     private val userRepository: UserRepository,
 ): UserService {
     override fun findByUsername(username: String): User {
-        return userRepository.findByUsername(username)?:throw UserNotFoundException("")
+        return userRepository.findByUsername(username)?:throw UserNotFoundException("User not found")
     }
 
     override fun findByEmail(email: String): User {
-        TODO("Not yet implemented")
+      return userRepository.findByEmail(email)?:throw UserNotFoundException("User not found")
     }
 
 }

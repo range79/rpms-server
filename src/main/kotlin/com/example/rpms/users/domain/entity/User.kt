@@ -1,5 +1,6 @@
 package com.example.rpms.users.domain.entity
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -12,7 +13,9 @@ data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     var id: UUID,
+    @Column(nullable = false,unique = true)
     val username: String,
     var password: String,
+    @Column(nullable = false,unique = true)
     var email: String,
 )
