@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties("password-encoder")
 data class PasswordEncoderProperties (
-    var saltLength: String,
+    var saltLength: Int,
     var hashLength: Int,
     var parallelism: Int,
     var memory: Int,
