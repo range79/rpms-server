@@ -1,3 +1,9 @@
 spring:
   application:
-   name: range-package-manager-server
+    name: range-package-manager-server
+
+password-encoder:
+  hash-length: ${PASSWORD_ENCODER_HASH_LENGTH:32}
+  salt-length: ${PASSWORD_ENCODER_SALT_LENGTH:16}
+  memory: ${PASSWORD_ENCODER_MEMORY:65536}
+  parallelism: ${PASSWORD_ENCODER_PARALLELISM:1}
