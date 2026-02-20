@@ -8,5 +8,5 @@ import org.springframework.boot.runApplication
 class RangePackageManagerServerApplication
 
 fun main(args: Array<String>) {
-    runApplication<com.range.rpms.RangePackageManagerServerApplication>(*args)
+    runApplication<RangePackageManagerServerApplication>(*args)
 }

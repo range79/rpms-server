@@ -12,11 +12,11 @@ import java.util.UUID
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    var id: UUID,
+    var id: UUID?=null,
     @Column(nullable = false,unique = true)
     val username: String,
     var password: String,
     @Column(nullable = false,unique = true)
     var email: String,
-    val role: com.range.rpms.users.domain.entity.Role
+    val role: Role
 )

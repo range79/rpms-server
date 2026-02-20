@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service
 @Service
 class AuthServiceImpl (
 
-): com.range.rpms.users.service.AuthService {
-    override fun login(loginRequest: com.range.rpms.users.dto.LoginRequest): com.range.rpms.users.dto.AuthResponse {
+):AuthService {
+    override fun login(loginRequest: LoginRequest):AuthResponse {
         TODO("Not yet implemented")
     }
 
-    override fun register(registerRequest: com.range.rpms.users.dto.RegisterRequest) {
+    override fun register(registerRequest: RegisterRequest) {
         TODO("Not yet implemented")
     }
 
@@ -30,7 +30,7 @@ class AuthServiceImpl (
         TODO("Not yet implemented")
     }
 
-    override fun acceptTwoFactoryAuthRequest(token: String): com.range.rpms.users.dto.AuthResponse {
+    override fun acceptTwoFactoryAuthRequest(token: String):AuthResponse {
         TODO("Not yet implemented")
     }
 

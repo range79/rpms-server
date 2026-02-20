@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 @ControllerAdvice
 class GlobalExceptionHandler
 {
-    @ExceptionHandler(_root_ide_package_.com.range.rpms.common.exception.BaseException::class)
-    fun handleBaseException(ex: com.range.rpms.common.exception.BaseException,
+    @ExceptionHandler(BaseException::class)
+    fun handleBaseException(ex:BaseException,
                             request: HttpServletRequest
-    ): com.range.rpms.common.dto.ExceptionResponse {
-        return _root_ide_package_.com.range.rpms.common.dto.ExceptionResponse(
+    ): ExceptionResponse {
+        return ExceptionResponse(
             ex.localizedMessage,
             request.requestURI,
             ex.status

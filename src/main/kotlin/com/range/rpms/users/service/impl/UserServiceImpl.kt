@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserServiceImpl (
-    private val userRepository: com.range.rpms.users.domain.repository.UserRepository,
-): com.range.rpms.users.service.UserService {
-    override fun findByUsername(username: String): com.range.rpms.users.domain.entity.User {
-        return userRepository.findByUsername(username)?:throw _root_ide_package_.com.range.rpms.users.exception.UserNotFoundException(
+    private val userRepository: UserRepository,
+):UserService {
+    override fun findByUsername(username: String): User {
+        return userRepository.findByUsername(username)?:throw UserNotFoundException(
             "User not found"
         )
     }
 
-    override fun findByEmail(email: String): com.range.rpms.users.domain.entity.User {
-      return userRepository.findByEmail(email)?:throw _root_ide_package_.com.range.rpms.users.exception.UserNotFoundException(
+    override fun findByEmail(email: String): User {
+      return userRepository.findByEmail(email)?:throw UserNotFoundException(
           "User not found"
       )
     }

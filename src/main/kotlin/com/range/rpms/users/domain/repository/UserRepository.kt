@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.Optional
 import java.util.UUID
 
-interface UserRepository : JpaRepository<com.range.rpms.users.domain.entity.User, UUID> {
-    fun findByUsername(username: String): com.range.rpms.users.domain.entity.User?
-    fun findByEmail(email: String): com.range.rpms.users.domain.entity.User?
+interface UserRepository : JpaRepository<User, UUID> {
+    fun findByUsername(username: String):User?
+    fun findByEmail(email: String): User?
 }

@@ -16,7 +16,7 @@ class PasswordEncoderConfig (
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
-        return  Argon2PasswordEncoder(
+        return Argon2PasswordEncoder(
             properties.saltLength,
             properties.hashLength,
             properties.parallelism,
