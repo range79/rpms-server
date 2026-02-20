@@ -1,0 +1,3 @@
+spring:
+  application:
+   name: range-package-manager-server
