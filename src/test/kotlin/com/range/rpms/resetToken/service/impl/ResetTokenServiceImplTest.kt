@@ -3,6 +3,7 @@ package com.range.rpms.resetToken.service.impl
 import com.range.rpms.registerToken.domain.entity.ResetToken
 import com.range.rpms.registerToken.domain.repository.ResetTokenRepository
 import com.range.rpms.registerToken.properties.ResetTokenProperties
+import com.range.rpms.registerToken.service.ResetTokenServiceImpl
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
