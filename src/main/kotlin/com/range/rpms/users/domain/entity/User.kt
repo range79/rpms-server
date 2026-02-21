@@ -8,9 +8,11 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import org.hibernate.annotations.SQLRestriction
 import java.util.UUID
 @Table(name = "user")
 @Entity
+//@SQLRestriction("account_status <> 'DELETED'")
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
