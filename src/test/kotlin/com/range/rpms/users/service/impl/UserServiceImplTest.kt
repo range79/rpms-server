@@ -52,5 +52,11 @@ class UserServiceImplTest {
         Mockito.`when`(userRepository.findByEmail("test")).thenReturn(mockUser)
         assertEquals(mockUser,userService.findByEmail("test"))
     }
+    @Test
+    fun `return null when username not found and email not found`() {
+        Mockito.`when`(userRepository.findByUsername("test")).thenReturn(null)
+        Mockito.`when`(userRepository.findByEmail("test")).thenReturn(null)
+        assertEquals(null, userService.findByEmailORUsername("test"))
+    }
 
 }

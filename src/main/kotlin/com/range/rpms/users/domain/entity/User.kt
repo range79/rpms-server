@@ -26,5 +26,5 @@ data class User(
     @Enumerated(EnumType.STRING)
     val role: Role,
     @Enumerated(EnumType.STRING)
-    val accountStatus: AccountStatus
+    var accountStatus: AccountStatus
 )

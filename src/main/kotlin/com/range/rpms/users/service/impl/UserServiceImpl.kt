@@ -20,7 +20,8 @@ class UserServiceImpl(
     }
 
     override fun findByEmailORUsername(emailORUsername: String): User? {
-        return findByEmail(emailORUsername) ?: findByUsername(emailORUsername)
+        return findByEmail(emailORUsername)
+            ?: findByUsername(emailORUsername)
 
     }
 
