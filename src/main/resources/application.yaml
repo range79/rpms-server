@@ -7,3 +7,7 @@ password-encoder:
   salt-length: ${PASSWORD_ENCODER_SALT_LENGTH:16}
   memory: ${PASSWORD_ENCODER_MEMORY:65536}
   parallelism: ${PASSWORD_ENCODER_PARALLELISM:1}
+
+reset-token:
+  email-limit: ${RESET_TOKEN_EMAIL_LIMIT:3}
+  time: ${RESET_TOKEN_TIME:300}

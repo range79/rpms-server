@@ -34,7 +34,7 @@ data class ResetToken(
             return ResetToken(
                 token = token,
                 email = email,
-                ttl = 300
+                ttl = ttl
             )
         }
     }
