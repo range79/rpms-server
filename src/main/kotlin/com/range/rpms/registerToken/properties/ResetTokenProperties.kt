@@ -1,8 +1,9 @@
-package com.range.rpms.token.properties
+package com.range.rpms.registerToken.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties("reset-token")
-data class TokenProperties (
+data class ResetTokenProperties (
     val time: Long,
+    val emailLimit: Long
 )
