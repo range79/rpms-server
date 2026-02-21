@@ -1,6 +1,7 @@
 package com.range.rpms.users.service.impl
 
 import com.range.rpms.common.exception.PasswordEncoderException
+import com.range.rpms.users.domain.entity.AccountStatus
 import com.range.rpms.users.domain.entity.Role
 import com.range.rpms.users.domain.entity.User
 import com.range.rpms.users.domain.repository.UserRepository
@@ -31,7 +32,8 @@ class RegisterServiceImpl(
             username = registerRequest.username,
             password = passwordEncoder.encode(registerRequest.password)
                 ?: throw PasswordEncoderException("server have problem with ur account"),
-            role = Role.USER
+            role = Role.USER,
+            accountStatus = AccountStatus.ACTIVE,
         )
         return userRepository.save(user)
 

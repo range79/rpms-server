@@ -10,7 +10,8 @@ class MockUserCreator {
                 "testUser",
                 "testPassword",
                 email = "testmail@test.com",
-                role = Role.USER
+                role = Role.USER,
+                accountStatus = AccountStatus.ACTIVE,
             )
         }
     }

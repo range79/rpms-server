@@ -2,6 +2,8 @@ package com.range.rpms.users.domain.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -19,5 +21,8 @@ data class User(
     var password: String,
     @Column(nullable = false,unique = true)
     var email: String,
-    val role: Role
+    @Enumerated(EnumType.STRING)
+    val role: Role,
+    @Enumerated(EnumType.STRING)
+    val accountStatus: AccountStatus
 )
