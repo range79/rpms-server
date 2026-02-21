@@ -33,7 +33,8 @@ class RegisterServiceImpl(
                 ?: throw PasswordEncoderException("server have problem with ur account"),
             role = Role.USER
         )
-        userRepository.save(user)
-        return user
+        return userRepository.save(user)
+
     }
+
 }
