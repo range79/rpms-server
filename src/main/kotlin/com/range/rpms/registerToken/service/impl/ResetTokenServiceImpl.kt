@@ -1,9 +1,10 @@
-package com.range.rpms.registerToken.service
+package com.range.rpms.registerToken.service.impl
 
 import com.range.rpms.registerToken.domain.entity.ResetToken
 import com.range.rpms.registerToken.domain.repository.ResetTokenRepository
 import com.range.rpms.registerToken.exception.ResetTokenLimitExceededException
 import com.range.rpms.registerToken.properties.ResetTokenProperties
+import com.range.rpms.registerToken.service.ResetTokenService
 import org.springframework.stereotype.Service
 
 @Service
@@ -24,8 +25,8 @@ class ResetTokenServiceImpl(
     }
 
     override fun validateToken(token: String): Boolean {
-            repository.findById(token).orElse(null) ?: return false
-            repository.deleteById(token)
+            val foundToken =repository.findById(token).orElse(null) ?: return false
+            repository.delete(foundToken)
             return true
         }
 
