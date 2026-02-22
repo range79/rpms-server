@@ -5,14 +5,24 @@ spring:
     host: ${MAIL_HOST}
     port: ${MAIL_PORT}
     username: ${MAIL_USERNAME}
-    password: ${MAIL:PASSWORD}
+    password: ${MAIL_PASSWORD}
+
+
+
 
 password-encoder:
   hash-length: ${PASSWORD_ENCODER_HASH_LENGTH:32}
   salt-length: ${PASSWORD_ENCODER_SALT_LENGTH:16}
   memory: ${PASSWORD_ENCODER_MEMORY:65536}
   parallelism: ${PASSWORD_ENCODER_PARALLELISM:1}
+  iterations: ${PASSWORD_ENCODER_ITERATIONS:3}
 
 reset-token:
   email-limit: ${RESET_TOKEN_EMAIL_LIMIT:3}
   time: ${RESET_TOKEN_TIME:300}
+rpms:
+  mail:
+    from: ${MAIL_USERNAME:}
+    name: ${APP_MAIL_NAME:RPMS Security}
+password-reset:
+  frontend-url: ${FRONTEND_URL}

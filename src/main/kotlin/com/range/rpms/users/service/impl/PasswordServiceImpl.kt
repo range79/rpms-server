@@ -30,7 +30,7 @@ class PasswordServiceImpl(
         val token = tokenEntity.token
 
         val resetLink = UriComponentsBuilder
-            .fromUriString(passwordResetProperties.frontendURL)
+            .fromUriString(passwordResetProperties.frontendUrl)
             .path("/reset-password")
             .queryParam("token", token)
             .build()
