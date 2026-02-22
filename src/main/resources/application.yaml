@@ -6,10 +6,8 @@ spring:
     port: ${MAIL_PORT}
     username: ${MAIL_USERNAME}
     password: ${MAIL_PASSWORD}
-
-
-
-
+  thymeleaf:
+    check-template-location: true
 password-encoder:
   hash-length: ${PASSWORD_ENCODER_HASH_LENGTH:32}
   salt-length: ${PASSWORD_ENCODER_SALT_LENGTH:16}
@@ -24,5 +22,6 @@ rpms:
   mail:
     from: ${MAIL_USERNAME:}
     name: ${APP_MAIL_NAME:RPMS Security}
+
 password-reset:
   frontend-url: ${FRONTEND_URL}
