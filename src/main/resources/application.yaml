@@ -1,6 +1,11 @@
 spring:
   application:
     name: range-package-manager-server
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL:PASSWORD}
 
 password-encoder:
   hash-length: ${PASSWORD_ENCODER_HASH_LENGTH:32}
