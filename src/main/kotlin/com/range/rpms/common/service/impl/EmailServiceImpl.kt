@@ -1,54 +1,95 @@
 package com.range.rpms.common.service.impl
 
+import com.range.rpms.common.enums.MailType
+import com.range.rpms.common.properties.MailProperties
 import com.range.rpms.common.service.EmailService
 import jakarta.mail.internet.MimeMessage
+import jakarta.mail.internet.InternetAddress
 import org.slf4j.LoggerFactory
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
+import org.thymeleaf.context.Context
+import org.thymeleaf.spring6.SpringTemplateEngine
 
 @Service
 class EmailServiceImpl(
-    private val mailSender: JavaMailSender
+    private val mailSender: JavaMailSender,
+    private val templateEngine: SpringTemplateEngine,
+    private val mailProperties: MailProperties
 ) : EmailService {
 
-    private val log = LoggerFactory.getLogger(EmailServiceImpl::class.java)
+    private val log = LoggerFactory.getLogger(javaClass)
 
     @Async
-    override fun sendEmail(
+    override fun sendTemplateEmail(
+        to: String,
+        type: MailType,
+        variables: Map<String, Any>,
+        fallbackText: String?
+    ) {
+        try {
+            val context = Context().apply {
+                variables.forEach { (k, v) -> setVariable(k, v) }
+            }
+
+            val html = templateEngine.process(
+                "mail/${type.template}",
+                context
+            )
+
+            val message: MimeMessage = mailSender.createMimeMessage()
+            val helper = MimeMessageHelper(message, true, "UTF-8")
+
+
+            helper.setFrom(
+                InternetAddress(
+                    mailProperties.from,
+                    mailProperties.name
+                )
+            )
+
+            helper.setTo(to)
+            helper.setSubject(type.subject)
+
+            if (!fallbackText.isNullOrBlank()) {
+                helper.setText(fallbackText, html)
+            } else {
+                helper.setText(html, true)
+            }
+
+            mailSender.send(message)
+
+            log.info("Template mail sent to={} type={}", to, type)
+
+        } catch (ex: Exception) {
+            log.error("Template mail failed type={}", type, ex)
+        }
+    }
+
+    @Async
+    override fun sendPlainEmail(
         to: String,
         subject: String,
-        content: String,
-        isHtml: Boolean
+        content: String
     ) {
-
         try {
-            if (isHtml) {
-                val message: MimeMessage = mailSender.createMimeMessage()
-                val helper = MimeMessageHelper(
-                    message,
-                    true,
-                    "UTF-8"
-                )
-                helper.setTo(to)
-                helper.setSubject(subject)
-                helper.setText(content, true)
+            val message = SimpleMailMessage()
 
-                mailSender.send(message)
+            message.from = mailProperties.from
 
-            } else {
-                val message = SimpleMailMessage()
-                message.setTo(to)
-                message.subject = subject
-                message.text = content
+            message.setTo(to)
+            message.subject = subject
+            message.text = content
 
-                mailSender.send(message)
-            }
-            log.info("Mail sent to {} (html={})", to, isHtml)
+            mailSender.send(message)
+
+            log.info("Plain mail sent to {}", to)
+
         } catch (ex: Exception) {
-            log.error("Mail send failed: {}", ex.message, ex)
+            log.error("Plain mail failed", ex)
         }
     }
 }
