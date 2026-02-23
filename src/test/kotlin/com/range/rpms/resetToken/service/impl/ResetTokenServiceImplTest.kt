@@ -1,15 +1,13 @@
 package com.range.rpms.resetToken.service.impl
 
-import com.range.rpms.registerToken.domain.entity.ResetToken
-import com.range.rpms.registerToken.domain.repository.ResetTokenRepository
-import com.range.rpms.registerToken.exception.ResetTokenLimitExceededException
-import com.range.rpms.registerToken.properties.ResetTokenProperties
-import com.range.rpms.registerToken.service.impl.ResetTokenServiceImpl
-import org.hamcrest.CoreMatchers.any
+import com.range.rpms.tokens.registerToken.domain.entity.ResetToken
+import com.range.rpms.tokens.registerToken.domain.repository.ResetTokenRepository
+import com.range.rpms.tokens.registerToken.exception.ResetTokenLimitExceededException
+import com.range.rpms.tokens.registerToken.properties.ResetTokenProperties
+import com.range.rpms.tokens.registerToken.service.impl.ResetTokenServiceImpl
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
 import org.mockito.Mockito.mock

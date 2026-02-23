@@ -2,7 +2,7 @@ package com.range.rpms.users.service.impl
 
 import com.range.rpms.common.enums.MailType
 import com.range.rpms.common.service.EmailService
-import com.range.rpms.registerToken.service.ResetTokenService
+import com.range.rpms.tokens.registerToken.service.ResetTokenService
 import com.range.rpms.users.exception.UserNotFoundException
 import com.range.rpms.users.properties.PasswordResetProperties
 import com.range.rpms.users.service.PasswordService

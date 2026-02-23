@@ -1,4 +1,4 @@
-package com.range.rpms.registerToken.properties
+package com.range.rpms.tokens.registerToken.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

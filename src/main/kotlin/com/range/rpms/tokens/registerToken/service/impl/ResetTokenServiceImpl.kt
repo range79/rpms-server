@@ -1,10 +1,10 @@
-package com.range.rpms.registerToken.service.impl
+package com.range.rpms.tokens.registerToken.service.impl
 
-import com.range.rpms.registerToken.domain.entity.ResetToken
-import com.range.rpms.registerToken.domain.repository.ResetTokenRepository
-import com.range.rpms.registerToken.exception.ResetTokenLimitExceededException
-import com.range.rpms.registerToken.properties.ResetTokenProperties
-import com.range.rpms.registerToken.service.ResetTokenService
+import com.range.rpms.tokens.registerToken.domain.entity.ResetToken
+import com.range.rpms.tokens.registerToken.domain.repository.ResetTokenRepository
+import com.range.rpms.tokens.registerToken.exception.ResetTokenLimitExceededException
+import com.range.rpms.tokens.registerToken.properties.ResetTokenProperties
+import com.range.rpms.tokens.registerToken.service.ResetTokenService
 import org.springframework.stereotype.Service
 
 @Service

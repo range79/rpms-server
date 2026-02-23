@@ -1,4 +1,4 @@
-package com.range.rpms.registerToken.domain.entity
+package com.range.rpms.tokens.registerToken.domain.entity
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash

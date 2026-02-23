@@ -1,4 +1,4 @@
-package com.range.rpms.registerToken.exception
+package com.range.rpms.tokens.registerToken.exception
 
 import com.range.rpms.common.exception.BaseException
 import org.springframework.http.HttpStatus
