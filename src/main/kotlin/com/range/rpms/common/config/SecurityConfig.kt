@@ -1,4 +1,4 @@
-package com.range.rpms.common.security
+package com.range.rpms.common.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,6 +17,7 @@ class SecurityConfig {
                 it.requestMatchers("/admin/**").hasRole("ADMIN")
                 it.anyRequest().permitAll()
             }
+            .oauth2ResourceServer { it.jwt {} }
         return http.build()
 
 
