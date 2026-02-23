@@ -1,4 +1,4 @@
-package com.range.rpms.common.security
+package com.range.rpms.common.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -10,13 +10,14 @@ import org.springframework.security.web.SecurityFilterChain
 class SecurityConfig {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        http.securityContext { it.disable() }
+        http.securityContext { it.disable() }.csrf { it.disable() }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
                 it.requestMatchers("/auth/**", "/public/**").permitAll()
                 it.requestMatchers("/admin/**").hasRole("ADMIN")
                 it.anyRequest().permitAll()
             }
+            .oauth2ResourceServer { it.jwt {} }
         return http.build()
 
 

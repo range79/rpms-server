@@ -1,4 +1,4 @@
-package com.range.rpms.common.security
+package com.range.rpms.common.config
 
 import com.range.rpms.common.properties.PasswordEncoderProperties
 import org.springframework.context.annotation.Bean
@@ -10,10 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder
 class PasswordEncoderConfig (
     private val properties: PasswordEncoderProperties
 ){
-
-
-
-
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         return Argon2PasswordEncoder(
