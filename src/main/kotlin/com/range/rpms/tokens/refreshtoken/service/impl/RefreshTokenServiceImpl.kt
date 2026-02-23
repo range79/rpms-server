@@ -6,6 +6,7 @@ import com.range.rpms.tokens.refreshtoken.domain.repository.RefreshTokenReposito
 import com.range.rpms.tokens.refreshtoken.exception.InvalidRefreshTokenException
 import com.range.rpms.tokens.refreshtoken.properties.RefreshTokenProperties
 import com.range.rpms.tokens.refreshtoken.service.RefreshTokenService
+import com.range.rpms.users.domain.entity.User
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.security.SecureRandom
@@ -23,7 +24,7 @@ class RefreshTokenServiceImpl(
     private fun ttlSeconds(): Long =
         refreshTokenProperties.refreshTokenDays * 24L * 60L * 60L
 
-    override fun issue(username: String): String {
+    override fun issue(user: User): String {
         val device = DeviceContextHolder.get()
             ?: throw IllegalStateException("DeviceContext not found")
 
@@ -33,7 +34,7 @@ class RefreshTokenServiceImpl(
         refreshTokenRepository.save(
             RefreshToken(
                 token = token,
-                userId = username,
+                userId = user.username,
                 familyId = familyId,
                 deviceId = device.deviceId,
                 deviceName = device.deviceName,

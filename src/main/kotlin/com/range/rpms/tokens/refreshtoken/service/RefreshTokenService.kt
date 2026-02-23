@@ -1,11 +1,12 @@
 package com.range.rpms.tokens.refreshtoken.service
 
+import com.range.rpms.users.domain.entity.User
 
 
 interface RefreshTokenService {
 
 
-    fun issue(username: String): String
+    fun issue(user: User): String
 
 
     fun rotate(oldRefreshToken: String): String
