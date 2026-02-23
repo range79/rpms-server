@@ -28,7 +28,7 @@ class GlobalExceptionHandler{
     fun handleException(ex: Exception, request: HttpServletRequest): ExceptionResponse {
         LOGGER.error(ex.localizedMessage, ex)
         return ExceptionResponse(
-            ex.localizedMessage,
+            "Internal server error",
             request.requestURI,
             HttpStatus.INTERNAL_SERVER_ERROR,
         )
