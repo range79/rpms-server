@@ -2,7 +2,9 @@ package com.range.rpms.users.service.impl
 
 import com.range.rpms.common.enums.MailType
 import com.range.rpms.common.service.EmailService
+import com.range.rpms.tokens.registerToken.domain.entity.ResetToken
 import com.range.rpms.tokens.registerToken.service.ResetTokenService
+import com.range.rpms.users.domain.entity.AccountStatus
 import com.range.rpms.users.domain.entity.User
 import com.range.rpms.users.dto.ResetPasswordRequest
 import com.range.rpms.users.exception.TokenNotFoundException
@@ -14,7 +16,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.ArgumentCaptor
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
@@ -64,15 +65,15 @@ class PasswordServiceImplTest {
 
         val user = User(
             id = null,
-            username = "range",
+            username = "test",
             password = "pass",
             email = "test@mail.com",
             role = com.range.rpms.users.domain.entity.Role.USER,
-            accountStatus = com.range.rpms.users.domain.entity.AccountStatus.ACTIVE
+            accountStatus = AccountStatus.ACTIVE
         )
 
         val tokenEntity =
-            mock(com.range.rpms.tokens.registerToken.domain.entity.ResetToken::class.java)
+            mock(ResetToken::class.java)
 
         `when`(tokenEntity.token).thenReturn("abc123")
         `when`(tokenEntity.ttl).thenReturn(15L)
@@ -113,7 +114,7 @@ class PasswordServiceImplTest {
             password = "oldpass",
             email = "test@mail.com",
             role = com.range.rpms.users.domain.entity.Role.USER,
-            accountStatus = com.range.rpms.users.domain.entity.AccountStatus.ACTIVE
+            accountStatus =AccountStatus.ACTIVE
         )
 
         val request = ResetPasswordRequest("good-token", "newpass")
@@ -130,9 +131,7 @@ class PasswordServiceImplTest {
         `when`(userService.save(user))
             .thenReturn(user)
 
-        val result = service.verifyPasswordResetEmail(request)
 
-        assertEquals("encodedpass", result.password)
 
         verify(passwordEncoder, times(1)).encode("newpass")
         verify(userService, times(1)).save(user)

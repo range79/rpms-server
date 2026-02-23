@@ -10,7 +10,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.hibernate.annotations.SQLRestriction
 import java.util.UUID
-@Table(name = "user")
+@Table(name = "users")
 @Entity
 //@SQLRestriction("account_status <> 'DELETED'")
 data class User(
@@ -26,5 +26,6 @@ data class User(
     @Enumerated(EnumType.STRING)
     val role: Role,
     @Enumerated(EnumType.STRING)
-    var accountStatus: AccountStatus
+    var accountStatus: AccountStatus,
+    var twoFactorEnabled: Boolean = false,
 )

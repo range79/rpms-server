@@ -31,19 +31,15 @@ class AuthServiceImpl(
         return tokenFactory.generateTokens(user)
     }
 
-    override fun resetPassword(resetPasswordRequest: ResetPasswordRequest): AuthResponse {
-        val user =passwordService.verifyPasswordResetEmail(resetPasswordRequest)
-        return tokenFactory.generateTokens(user)
-
+    override fun resetPassword(resetPasswordRequest: ResetPasswordRequest) {
+        passwordService.verifyPasswordResetEmail(resetPasswordRequest)
     }
 
     override fun forgotPassword(email: String) {
       passwordService.sendPasswordResetEmail(email)
     }
 
-    override fun twoFactoryAuthRequest(email: String) {
 
-    }
 
     override fun acceptTwoFactoryAuthRequest(token: String):AuthResponse {
         TODO("Not yet implemented")
