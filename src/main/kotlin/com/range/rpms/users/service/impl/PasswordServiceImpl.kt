@@ -42,7 +42,6 @@ class PasswordServiceImpl(
             "resetLink" to resetLink,
             "expireMinutes" to tokenEntity.ttl,
         )
-
         emailService.sendTemplateEmail(
             to = email,
             type = MailType.RESET_PASSWORD,

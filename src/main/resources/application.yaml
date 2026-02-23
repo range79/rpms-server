@@ -22,6 +22,8 @@ rpms:
   mail:
     from: ${MAIL_USERNAME:}
     name: ${APP_MAIL_NAME:RPMS Security}
-
 password-reset:
   frontend-url: ${FRONTEND_URL}
+jwt:
+  secret: ${JWT_SECRET}
+  expires-at: ${JWT_EXPIRE_TIME:15}
