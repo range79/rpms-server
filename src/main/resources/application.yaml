@@ -8,6 +8,13 @@ spring:
     password: ${MAIL_PASSWORD}
   thymeleaf:
     check-template-location: true
+  data:
+    redis:
+      host: ${REDIS_HOST:redis}
+      port: ${REDIS_PORT:6379}
+
+
+# password encoder configurations
 password-encoder:
   hash-length: ${PASSWORD_ENCODER_HASH_LENGTH:32}
   salt-length: ${PASSWORD_ENCODER_SALT_LENGTH:16}
@@ -15,15 +22,22 @@ password-encoder:
   parallelism: ${PASSWORD_ENCODER_PARALLELISM:1}
   iterations: ${PASSWORD_ENCODER_ITERATIONS:3}
 
+# reset token configurations
 reset-token:
   email-limit: ${RESET_TOKEN_EMAIL_LIMIT:3}
   time: ${RESET_TOKEN_TIME:300}
+
+# app configurations
 rpms:
   mail:
     from: ${MAIL_USERNAME:}
     name: ${APP_MAIL_NAME:RPMS Security}
+
+# password reset configurations
 password-reset:
   frontend-url: ${FRONTEND_URL}
+
+# jwt configurations
 jwt:
   secret: ${JWT_SECRET}
   expires-at: ${JWT_EXPIRE_TIME:15}

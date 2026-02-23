@@ -13,13 +13,13 @@ import java.time.Instant
 class JwtServiceImpl(
     private val jwtEncoder: JwtEncoder,
     private val jwtProperties: JwtProperties
-): JwtService {
+) : JwtService {
     override fun generateToken(user: User): String {
-val now = Instant.now();
-        val claims= JwtClaimsSet.builder()
+        val now = Instant.now();
+        val claims = JwtClaimsSet.builder()
             .subject(user.username)
             .issuedAt(now)
-            .expiresAt(now.plusSeconds(jwtProperties.expiresAt*60))
+            .expiresAt(now.plusSeconds(jwtProperties.expiresAt * 60))
             .claim("role", user.role)
             .build()
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).tokenValue
