@@ -1,0 +1,1 @@
+# Im trying made aur(archlinux user repository) alternative
