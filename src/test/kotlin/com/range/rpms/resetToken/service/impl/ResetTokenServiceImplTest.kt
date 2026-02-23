@@ -53,15 +53,15 @@ class ResetTokenServiceImplTest {
     }
 
     @Test
-    fun `return false when token not exists`() {
+    fun `return null false when token not exists`() {
         Mockito.`when`(repository.findById("test")).thenReturn(Optional.ofNullable(null))
-        assertEquals(false, service.validateToken("test"))
+        assertEquals(null, service.validateToken("test"))
     }
     @Test
     fun `return true when token exists`() {
         Mockito.`when`(repository.findById("test")).thenReturn(Optional.of(resetToken))
 
-        assertEquals(true, service.validateToken("test"))
+        assertEquals("test", service.validateToken("test"))
 
         Mockito.verify(repository).delete(resetToken)
     }
