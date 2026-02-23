@@ -1,5 +1,8 @@
 package com.range.rpms.tokens.jwt.config
 
+import com.nimbusds.jose.jwk.JWKSet
+import com.nimbusds.jose.jwk.OctetSequenceKey
+import com.nimbusds.jose.jwk.source.ImmutableJWKSet
 import com.nimbusds.jose.jwk.source.ImmutableSecret
 import com.range.rpms.tokens.jwt.properties.JwtProperties
 import org.springframework.context.annotation.Bean
@@ -10,15 +13,22 @@ import java.nio.charset.StandardCharsets
 import javax.crypto.spec.SecretKeySpec
 
 @Configuration
-class JwtEncoderConfig (
+class JwtEncoderConfig(
     private val jwtProperties: JwtProperties
-){
+) {
+
     @Bean
     fun jwtEncoder(): JwtEncoder {
-        val key = SecretKeySpec(
-            jwtProperties.secret.toByteArray(StandardCharsets.UTF_8),
-            "HmacSHA256"
-        )
-        return NimbusJwtEncoder(ImmutableSecret(key))
+
+        val secret = jwtProperties.secret.toByteArray(StandardCharsets.UTF_8)
+
+        val jwk = OctetSequenceKey.Builder(secret)
+            .algorithm(com.nimbusds.jose.JWSAlgorithm.HS256)
+            .keyID("jwt-key")
+            .build()
+
+        val jwkSet = JWKSet(jwk)
+
+        return NimbusJwtEncoder(ImmutableJWKSet(jwkSet))
     }
 }
