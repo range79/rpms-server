@@ -13,6 +13,7 @@ data class RefreshToken(
     val userId: String,
     @Indexed
     val familyId: String,
+    val deviceId: String,
     val deviceName: String? = null,
     val revoked: Boolean = false,
     @TimeToLive

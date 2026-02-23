@@ -41,3 +41,5 @@ password-reset:
 jwt:
   secret: ${JWT_SECRET}
   expires-at: ${JWT_EXPIRE_TIME:15}
+refresh-token:
+  refresh-token-days: ${REFRESH_TOKEN_DAYS:30}

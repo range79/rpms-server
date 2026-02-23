@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface RefreshTokenRepository : CrudRepository<RefreshToken, String>{
+    fun deleteAllByUserIdAndFamilyId(userId: String, familyId: String)
+    fun deleteAllByUserId(userId: String)
 
 }
