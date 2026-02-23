@@ -3,11 +3,12 @@ package com.range.rpms.users.service
 import com.range.rpms.users.dto.AuthResponse
 import com.range.rpms.users.dto.LoginRequest
 import com.range.rpms.users.dto.RegisterRequest
+import com.range.rpms.users.dto.ResetPasswordRequest
 
 interface AuthService {
     fun login(loginRequest: LoginRequest): AuthResponse
     fun register(registerRequest: RegisterRequest): AuthResponse
-    fun resetPassword(token: String)
+    fun resetPassword(resetPasswordRequest: ResetPasswordRequest): AuthResponse
     fun forgotPassword(email: String)
     fun twoFactoryAuthRequest(email:String)
     fun acceptTwoFactoryAuthRequest(token: String): AuthResponse

@@ -6,4 +6,5 @@ interface UserService {
     fun findByUsername(username: String): User?
     fun findByEmail(email: String): User?
     fun findByEmailORUsername(emailORUsername: String): User?
+    fun save(user: User): User
 }
