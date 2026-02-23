@@ -4,6 +4,7 @@ import com.range.rpms.common.enums.MailType
 import com.range.rpms.common.exception.PasswordEncoderException
 import com.range.rpms.common.service.EmailService
 import com.range.rpms.tokens.registerToken.service.ResetTokenService
+import com.range.rpms.users.domain.entity.AccountStatus
 import com.range.rpms.users.domain.entity.User
 import com.range.rpms.users.dto.ResetPasswordRequest
 import com.range.rpms.users.exception.TokenNotFoundException
@@ -55,13 +56,17 @@ class PasswordServiceImpl(
         )
     }
 
-    override fun verifyPasswordResetEmail(resetPassword: ResetPasswordRequest): User {
+    override fun verifyPasswordResetEmail(resetPassword: ResetPasswordRequest) {
+
         val email = resetTokenService.validateToken(resetPassword.token)
             ?: throw TokenNotFoundException()
         val user = userService.findByEmail(email) ?: throw UserNotFoundException()
+
+
+
         user.password = passwordEncoder.encode(resetPassword.newPassword) ?: throw PasswordEncoderException()
 
-        return userService.save(user)
+        userService.save(user)
     }
 
 

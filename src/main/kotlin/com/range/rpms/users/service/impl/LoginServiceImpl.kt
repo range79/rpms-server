@@ -17,7 +17,7 @@ class LoginServiceImpl(
     private val passwordEncoder: PasswordEncoder
 ) : LoginService {
     override fun login(loginRequest: LoginRequest): User {
-        val user = userService.findByEmailORUsername(loginRequest.usernameOREmail) ?: throw AuthenticationException()
+        val user = userService.findByEmailORUsername(loginRequest.usernameOrEmail) ?: throw AuthenticationException()
         accountChecker(user.accountStatus)
         if (!passwordEncoder.matches(loginRequest.password, user.password)){
             throw AuthenticationException()

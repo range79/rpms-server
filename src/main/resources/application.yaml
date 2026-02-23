@@ -12,6 +12,9 @@ spring:
     redis:
       host: ${REDIS_HOST:redis}
       port: ${REDIS_PORT:6379}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
 
 
 # password encoder configurations
@@ -36,7 +39,6 @@ rpms:
 # password reset configurations
 password-reset:
   frontend-url: ${FRONTEND_URL}
-
 # jwt configurations
 jwt:
   secret: ${JWT_SECRET}
