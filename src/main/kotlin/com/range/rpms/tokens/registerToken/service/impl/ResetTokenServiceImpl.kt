@@ -24,10 +24,10 @@ class ResetTokenServiceImpl(
 
     }
 
-    override fun validateToken(token: String): Boolean {
-            val foundToken =repository.findById(token).orElse(null) ?: return false
+    override fun validateToken(token: String): String? {
+            val foundToken =repository.findById(token).orElse(null) ?: return null
             repository.delete(foundToken)
-            return true
+            return foundToken.email
         }
 
 }

@@ -31,7 +31,7 @@ class RegisterServiceImpl(
             email = registerRequest.email,
             username = registerRequest.username,
             password = passwordEncoder.encode(registerRequest.password)
-                ?: throw PasswordEncoderException("server have problem with ur account"),
+                ?: throw PasswordEncoderException(),
             role = Role.USER,
             accountStatus = AccountStatus.ACTIVE,
         )

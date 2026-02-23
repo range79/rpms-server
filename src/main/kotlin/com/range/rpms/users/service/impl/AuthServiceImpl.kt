@@ -4,6 +4,7 @@ import com.range.rpms.tokens.tokenfactory.TokenFactory
 import com.range.rpms.users.dto.AuthResponse
 import com.range.rpms.users.dto.LoginRequest
 import com.range.rpms.users.dto.RegisterRequest
+import com.range.rpms.users.dto.ResetPasswordRequest
 import com.range.rpms.users.service.AuthService
 import com.range.rpms.users.service.LoginService
 import com.range.rpms.users.service.PasswordService
@@ -15,7 +16,8 @@ class AuthServiceImpl(
     val tokenFactory: TokenFactory,
     val loginService: LoginService,
     val registerService: RegisterService,
-    val passwordService: PasswordService
+    val passwordService: PasswordService,
+
 )
 
 :AuthService {
@@ -29,8 +31,10 @@ class AuthServiceImpl(
         return tokenFactory.generateTokens(user)
     }
 
-    override fun resetPassword(token: String) {
-        TODO()
+    override fun resetPassword(resetPasswordRequest: ResetPasswordRequest): AuthResponse {
+        val user =passwordService.verifyPasswordResetEmail(resetPasswordRequest)
+        return tokenFactory.generateTokens(user)
+
     }
 
     override fun forgotPassword(email: String) {
