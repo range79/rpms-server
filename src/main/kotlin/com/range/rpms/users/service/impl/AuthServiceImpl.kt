@@ -5,6 +5,7 @@ import com.range.rpms.users.dto.AuthResponse
 import com.range.rpms.users.dto.LoginRequest
 import com.range.rpms.users.dto.RegisterRequest
 import com.range.rpms.users.dto.ResetPasswordRequest
+import com.range.rpms.users.exception.TwoFactoryAuthEnabledException
 import com.range.rpms.users.service.AuthService
 import com.range.rpms.users.service.LoginService
 import com.range.rpms.users.service.PasswordService
@@ -23,6 +24,9 @@ class AuthServiceImpl(
 :AuthService {
     override fun login(loginRequest: LoginRequest):AuthResponse {
         val user =loginService.login(loginRequest)
+        if (user.twoFactorEnabled){
+            throw TwoFactoryAuthEnabledException()
+        }
         return tokenFactory.generateTokens(user)
     }
 
@@ -39,9 +43,10 @@ class AuthServiceImpl(
       passwordService.sendPasswordResetEmail(email)
     }
 
-
-
-    override fun acceptTwoFactoryAuthRequest(token: String):AuthResponse {
+    override fun acceptTwoFactoryAuthRequest(
+        email: String,
+        token: String
+    ): AuthResponse {
         TODO("Not yet implemented")
     }
 
