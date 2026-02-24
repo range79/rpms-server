@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: range-package-manager-server
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+
+  thymeleaf:
+    check-template-location: true
+    cache: false
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+  jpa:
+    open-in-view: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+rpms:
+  mail:
+    from: ${MAIL_FROM:${MAIL_USERNAME:dev@localhost}}
+    name: ${APP_MAIL_NAME:RPMS Dev}
+
+password-reset:
+  frontend-url: ${FRONTEND_URL:http://localhost:3000}
+
+jwt:
+  secret: ${JWT_SECRET:dev-secret-change-me}
+  expires-at: ${JWT_EXPIRE_TIME:15}
+
+refresh-token:
+  refresh-token-days: ${REFRESH_TOKEN_DAYS:30}
+
+reset-token:
+  email-limit: ${RESET_TOKEN_EMAIL_LIMIT:10}
+  time: ${RESET_TOKEN_TIME:300}
+
+
+password-encoder:
+  hash-length: ${PASSWORD_ENCODER_HASH_LENGTH:32}
+  salt-length: ${PASSWORD_ENCODER_SALT_LENGTH:16}
+  memory: ${PASSWORD_ENCODER_MEMORY:65536}
+  parallelism: ${PASSWORD_ENCODER_PARALLELISM:1}
+  iterations: ${PASSWORD_ENCODER_ITERATIONS:3}
