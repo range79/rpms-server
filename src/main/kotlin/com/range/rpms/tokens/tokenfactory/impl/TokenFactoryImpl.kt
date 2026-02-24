@@ -16,7 +16,7 @@ class TokenFactoryImpl (
 
         val accessToken=jwtService.generateToken(user)
         val refreshToken=refreshTokenService.issue(user)
-        return AuthResponse(refreshToken, accessToken)
+        return AuthResponse.success(refreshToken, accessToken)
 
 
     }
