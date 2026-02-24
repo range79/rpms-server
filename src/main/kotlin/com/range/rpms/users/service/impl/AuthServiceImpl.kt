@@ -1,6 +1,7 @@
 package com.range.rpms.users.service.impl
 
 import com.range.rpms.tokens.tokenfactory.TokenFactory
+import com.range.rpms.tokens.twofactor.service.TwoFactorService
 import com.range.rpms.users.dto.AuthResponse
 import com.range.rpms.users.dto.LoginRequest
 import com.range.rpms.users.dto.RegisterRequest
@@ -18,18 +19,24 @@ class AuthServiceImpl(
     val loginService: LoginService,
     val registerService: RegisterService,
     val passwordService: PasswordService,
+    val twoFactorService: TwoFactorService
 
 )
 
 :AuthService {
     override fun login(loginRequest: LoginRequest):AuthResponse {
         val user =loginService.login(loginRequest)
-        if (user.twoFactorEnabled){
-            throw TwoFactoryAuthEnabledException()
+        if (!user.twoFactorEnabled) {
+            return tokenFactory.generateTokens(user)
         }
-        return tokenFactory.generateTokens(user)
-    }
 
+        val pending = twoFactorService.createPendingLogin(user.username,user.email)
+
+        return AuthResponse.twoFactorRequired(
+            pending.id,
+            pending.expiresIn
+        )
+    }
     override fun register(registerRequest: RegisterRequest) : AuthResponse{
         val user =registerService.register(registerRequest)
         return tokenFactory.generateTokens(user)
@@ -44,7 +51,7 @@ class AuthServiceImpl(
     }
 
     override fun acceptTwoFactoryAuthRequest(
-        email: String,
+        pendingId: String,
         token: String
     ): AuthResponse {
         TODO("Not yet implemented")

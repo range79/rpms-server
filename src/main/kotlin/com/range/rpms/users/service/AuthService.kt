@@ -10,6 +10,6 @@ interface AuthService {
     fun register(registerRequest: RegisterRequest): AuthResponse
     fun resetPassword(resetPasswordRequest: ResetPasswordRequest)
     fun forgotPassword(email: String)
-    fun acceptTwoFactoryAuthRequest(email:String,token: String): AuthResponse
+    fun acceptTwoFactoryAuthRequest(pendingId:String,token: String): AuthResponse
     fun logout()
 }
