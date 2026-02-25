@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "4.0.3"
     id("io.spring.dependency-management") version "1.1.7"
 }
+val springCloudVersion by extra("2025.1.0")
 
 group = "com.range"
 version = "0.0.1-SNAPSHOT"
@@ -33,6 +34,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.security:spring-security-test")
@@ -46,6 +48,11 @@ dependencies {
 kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
+    }
+}
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
     }
 }
 

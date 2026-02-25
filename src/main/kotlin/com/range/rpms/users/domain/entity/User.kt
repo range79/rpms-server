@@ -19,8 +19,8 @@ data class User(
     var id: UUID?=null,
     @Column(nullable = false,unique = true)
     val username: String,
-    @Column(nullable = false)
-    var password: String,
+
+    val keycloakId: String,
     @Column(nullable = false,unique = true)
     var email: String,
     @Enumerated(EnumType.STRING)
