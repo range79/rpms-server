@@ -17,17 +17,17 @@ interface SshKeyApi {
     fun add(
         @RequestAttribute("jwt") jwt: Jwt,
         @Valid @RequestBody req: AddSshKeyRequest
-    ): ResponseEntity<SshKeyResponse>
+    ): SshKeyResponse
 
     @GetMapping
     fun list(
         @RequestAttribute("jwt") jwt: Jwt,
         pageable: Pageable
-    ): ResponseEntity<Page<SshKeyResponse>>
+    ): Page<SshKeyResponse>
 
     @DeleteMapping("/{id}")
     fun revoke(
         @RequestAttribute("jwt") jwt: Jwt,
         @PathVariable id: UUID
-    ): ResponseEntity<Void>
+    )
 }

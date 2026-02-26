@@ -9,41 +9,42 @@ import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.jwt.Jwt
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
-import java.util.UUID
+import java.util.*
+
 @RestController
 class SshKeyController(
     private val sshKeyService: SshKeyService
 ) : SshKeyApi {
+
+    @ResponseStatus(HttpStatus.CREATED)
     override fun add(
         @AuthenticationPrincipal jwt: Jwt,
-        @Valid req: AddSshKeyRequest
-    ): ResponseEntity<SshKeyResponse> {
+        @Valid @RequestBody req: AddSshKeyRequest
+    ): SshKeyResponse {
         val userId = jwtUserId(jwt)
-        val created = sshKeyService.addKey(userId, req)
-        return ResponseEntity.status(HttpStatus.CREATED).body(created)
+        return sshKeyService.addKey(userId, req)
     }
 
     override fun list(
         @AuthenticationPrincipal jwt: Jwt,
         pageable: Pageable
-    ): ResponseEntity<Page<SshKeyResponse>> {
+    ): Page<SshKeyResponse> {
         val userId = jwtUserId(jwt)
-        return ResponseEntity.ok(sshKeyService.listActiveKeys(userId, pageable))
+        return sshKeyService.listActiveKeys(userId, pageable)
     }
 
-
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     override fun revoke(
         @AuthenticationPrincipal jwt: Jwt,
         id: UUID
-    ): ResponseEntity<Void> {
+    ) {
         val userId = jwtUserId(jwt)
         sshKeyService.revoke(id, userId)
-        return ResponseEntity.noContent().build()
     }
 
     private fun jwtUserId(jwt: Jwt): UUID {
