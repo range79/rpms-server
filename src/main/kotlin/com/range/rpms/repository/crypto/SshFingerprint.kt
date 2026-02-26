@@ -1,5 +1,4 @@
 package com.range.rpms.repository.crypto
-package com.range.rpms.repository.crypto
 
 import com.range.rpms.repository.exception.InvalidSshPublicKeyException
 import java.security.MessageDigest
@@ -27,7 +26,7 @@ object SshFingerprint {
         "MD5:" + hexColonDigest(publicKey, "MD5")
 
     fun detectDefault(publicKey: String): String {
-        // OpenSSH modern default
+
         return sha256(publicKey)
     }
 
