@@ -21,7 +21,7 @@ class JwtServiceImpl(
         val headers = JwsHeader.with(MacAlgorithm.HS256).build()
 
         val claims = JwtClaimsSet.builder()
-            .subject(user.username)
+            .subject(user.id.toString())
             .issuedAt(now)
             .expiresAt(now.plusSeconds(jwtProperties.expiresAt * 60))
             .claim("role", user.role.name)

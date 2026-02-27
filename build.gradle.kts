@@ -41,6 +41,12 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("org.springframework.security:spring-security-oauth2-jose")
+    // Source: https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit
+    implementation("org.eclipse.jgit:org.eclipse.jgit:7.5.0.202512021534-r")
+    // Source: https://mvnrepository.com/artifact/org.apache.sshd/sshd-core
+    implementation("org.apache.sshd:sshd-core:3.0.0-M2")
+    // Source: https://mvnrepository.com/artifact/org.apache.sshd/sshd-git
+    implementation("org.apache.sshd:sshd-git:3.0.0-M2")
 }
 
 kotlin {
