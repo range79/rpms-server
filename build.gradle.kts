@@ -42,7 +42,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("org.springframework.security:spring-security-oauth2-jose")
     // Source: https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit
-    implementation("org.eclipse.jgit:org.eclipse.jgit:7.5.0.202512021534-r")
+    implementation("org.eclipse.jgit:org.eclipse.jgit:7.6.0.202603022253-r")
     // Source: https://mvnrepository.com/artifact/org.apache.sshd/sshd-core
     implementation("org.apache.sshd:sshd-core:3.0.0-M2")
     // Source: https://mvnrepository.com/artifact/org.apache.sshd/sshd-git
